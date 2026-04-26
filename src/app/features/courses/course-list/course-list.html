@@ -1,0 +1,7 @@
+<h1 class="title">Lista de cursos</h1>
+
+<ul>
+@for (item of Courses; track $index){
+  <li>{{ item.name }} - {{ item.price }}</li>
+}
+</ul>
