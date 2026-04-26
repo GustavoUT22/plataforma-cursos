@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CourseService } from '../../../core/services/course.service';
 import { Course } from '../../../shared/models/course.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-course-list',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './course-list.html',
   styleUrl: './course-list.css',
 })

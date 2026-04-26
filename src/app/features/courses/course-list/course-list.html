@@ -1,6 +1,18 @@
 <h1 class="title">Lista de cursos</h1>
-<ul>
+<div class="courses-wrapper">
 @for (item of Courses; track $index){
-  <li>{{ item.name }} - {{ item.price }}</li>
+  <div class="card">
+    <h3>{{item.name}}</h3>
+    <p>{{item.description}}</p>
+    <ul>
+      <li>Categoría: {{item.category}}</li>
+      <li>Docente: {{item.teacher}}</li>
+      <li>Modalidad: {{item.modality}}</li>
+      <li>Duración: {{item.duration}}</li>
+      <li>Vacantes: {{item.vacancies}}</li>
+      <li>Precio: <strong>{{item.price}}</strong></li>
+      <li>Inicio: <i>{{item.startDate | date: 'dd/MM/yyyy'}}</i></li>
+    </ul>
+  </div>
 }
-</ul>
+</div>

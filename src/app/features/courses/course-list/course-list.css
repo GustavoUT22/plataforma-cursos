@@ -1,0 +1,11 @@
+.card {
+  border: 1px solid black;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.courses-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
