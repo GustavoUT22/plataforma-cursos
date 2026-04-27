@@ -11,10 +11,10 @@ import { RouterLink } from "@angular/router";
   styleUrl: './course-list.css',
 })
 export class CourseList implements OnInit {
-  Courses: Course[] = [];
+  courses: Course[] = [];
   private courseService = inject(CourseService);
 
   ngOnInit(): void {
-      this.Courses = this.courseService.getCourses();
+      this.courses = this.courseService.getCourses();
   }
 }

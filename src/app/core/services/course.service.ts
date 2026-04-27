@@ -8,7 +8,7 @@ export class CourseService {
   private courses: Course[] = [
     {
       id: 1,
-      name: 'Curso de Angular',
+      name: 'Angular',
       category: 'Desarrollo web',
       teacher: 'Juan Pérez',
       modality: 'Presencial',
@@ -21,7 +21,7 @@ export class CourseService {
     },
     {
       id: 2,
-      name: 'Curso de React',
+      name: 'React',
       category: 'Desarrollo web',
       teacher: 'María Gómez',
       modality: 'Online',
@@ -34,7 +34,7 @@ export class CourseService {
     },
     {
       id: 3,
-      name: 'Curso de Python',
+      name: 'Python',
       category: 'Programación',
       teacher: 'Carlos López',
       modality: 'Presencial',

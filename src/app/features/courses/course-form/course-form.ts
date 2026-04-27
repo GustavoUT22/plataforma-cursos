@@ -16,15 +16,15 @@ export class CourseForm implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(''),
-      category: new FormControl(''),
-      teacher: new FormControl(''),
-      modality: new FormControl('Presencial'),
+      name: new FormControl('', [Validators.required]),
+      category: new FormControl('', [Validators.required]),
+      teacher: new FormControl('', [Validators.required]),
+      modality: new FormControl('Presencial', [Validators.required]),
       duration: new FormControl(0),
       vacancies: new FormControl(0),
       price: new FormControl(0),
-      startDate: new FormControl(''),
-      isActive: new FormControl(true),
+      startDate: new FormControl('', [Validators.required]),
+      isActive: new FormControl(true, [Validators.required]),
       description: new FormControl(''),
     });
   }

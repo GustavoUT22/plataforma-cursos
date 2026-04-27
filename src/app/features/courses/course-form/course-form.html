@@ -2,22 +2,33 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
     <label>Nombre</label>
-    <input formControlName="name" />
+    <input formControlName="name" placeholder="Curso de Angular básico" />
+    @if (form.get('name')?.touched && form.get('name')?.invalid) {
+      <small style="color: red">
+        @if (form.get('name')?.errors?.['required']) {
+          El nombre es obligatorio
+        }
+        @if (form.get('name')?.errors?.['minlength']) {
+          Mínimo 3 caracteres
+        }
+      </small>
+    }
   </div>
 
   <div>
     <label>Categoría</label>
-    <input formControlName="category" />
+    <input formControlName="category" placeholder="Programación, Diseño, Marketing" />
   </div>
 
   <div>
     <label>Docente</label>
-    <input formControlName="teacher" />
+    <input formControlName="teacher" placeholder="Juan Pérez" />
   </div>
 
   <div>
     <label>Modalidad</label>
     <select formControlName="modality">
+      <option value="" disabled selected>Seleccione una modalidad</option>
       <option value="Presencial">Presencial</option>
       <option value="Online">Online</option>
     </select>
@@ -25,22 +36,22 @@
 
   <div>
     <label>Duración (horas)</label>
-    <input formControlName="duration" type="number" />
+    <input formControlName="duration" type="number" placeholder="40" />
   </div>
 
   <div>
     <label>Vacantes</label>
-    <input formControlName="vacancies" type="number" />
+    <input formControlName="vacancies" type="number" placeholder="25" />
   </div>
 
   <div>
     <label>Costo</label>
-    <input formControlName="price" type="number" />
+    <input formControlName="price" type="number" placeholder="150.00" />
   </div>
 
   <div>
     <label>Fecha de inicio</label>
-    <input formControlName="startDate" type="date" />
+    <input formControlName="startDate" type="date" placeholder="Seleccione una fecha" />
   </div>
 
   <div>
@@ -50,7 +61,10 @@
 
   <div>
     <label>Descripción</label>
-    <textarea formControlName="description"></textarea>
+    <textarea
+      formControlName="description"
+      placeholder="Contenido y objetivos del curso"
+    ></textarea>
   </div>
 
   <button type="submit">Guardar</button>

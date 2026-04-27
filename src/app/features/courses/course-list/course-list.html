@@ -1,19 +1,25 @@
 <h1 class="title">Lista de cursos</h1>
 <div class="courses-wrapper">
-@for (item of Courses; track $index){
-  <div class="card">
-    <h3>{{item.name}}</h3>
-    <p>{{item.description}}</p>
-    <ul>
-      <li>Categoría: {{item.category}}</li>
-      <li>Docente: {{item.teacher}}</li>
-      <li>Modalidad: {{item.modality}}</li>
-      <li>Duración: {{item.duration}} horas</li>
-      <li>Vacantes: {{item.vacancies}}</li>
-      <li>Precio: <strong>{{item.price}}</strong></li>
-      <li>Inicio: <i>{{item.startDate | date: 'dd/MM/yyyy'}}</i></li>
-    </ul>
-    <a [routerLink]="['/courses', item.id]">Ver Detalle</a>
-  </div>
-}
+  @for (item of courses; track $index) {
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+        </div>
+        <div class="card-back">
+          <ul>
+            <li><strong>Categoría:</strong> {{ item.category }}</li>
+            <li><strong>Docente:</strong> {{ item.teacher }}</li>
+            <li><strong>Modalidad:</strong> {{ item.modality }}</li>
+            <li><strong>Duración:</strong> {{ item.duration }} horas</li>
+            <li><strong>Vacantes:</strong> {{ item.vacancies }}</li>
+            <li><strong>Precio:</strong> {{ item.price }}</li>
+            <li><strong>Inicio:</strong> <i> {{ item.startDate | date: 'dd/MM/yyyy' }}</i></li>
+          </ul>
+          <a [routerLink]="['/courses', item.id]">Ver Detalle</a>
+        </div>
+      </div>
+    </div>
+  }
 </div>
