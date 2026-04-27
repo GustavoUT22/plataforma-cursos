@@ -1,1 +1,12 @@
-<p>course-detail works!</p>
+<h1>Detalle de curso</h1>
+
+<h2>{{ course.name }}</h2>
+<p>Categoría: {{ course.category }}</p>
+<p>Docente: {{ course.teacher }}</p>
+<p>Modalidad: {{ course.modality }}</p>
+<p>Duración: {{ course.duration }} horas</p>
+<p>Vacantes: {{ course.vacancies }}</p>
+<p>Costo: {{ course.price }}</p>
+<p>Fecha de inicio: {{ course.startDate | date: 'dd/mm/yyyy' }}</p>
+<p>Estado: {{ course.isActive ? 'Activo' : 'Inactivo' }}</p>
+<p>Descripción: {{ course.description }}</p>

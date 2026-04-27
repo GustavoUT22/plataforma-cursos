@@ -1,0 +1,57 @@
+<h2>Este es el formulario de creación de una tarea</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Nombre</label>
+    <input formControlName="name" />
+  </div>
+
+  <div>
+    <label>Categoría</label>
+    <input formControlName="category" />
+  </div>
+
+  <div>
+    <label>Docente</label>
+    <input formControlName="teacher" />
+  </div>
+
+  <div>
+    <label>Modalidad</label>
+    <select formControlName="modality">
+      <option value="Presencial">Presencial</option>
+      <option value="Online">Online</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Duración (horas)</label>
+    <input formControlName="duration" type="number" />
+  </div>
+
+  <div>
+    <label>Vacantes</label>
+    <input formControlName="vacancies" type="number" />
+  </div>
+
+  <div>
+    <label>Costo</label>
+    <input formControlName="price" type="number" />
+  </div>
+
+  <div>
+    <label>Fecha de inicio</label>
+    <input formControlName="startDate" type="date" />
+  </div>
+
+  <div>
+    <label>Activo</label>
+    <input formControlName="isActive" type="checkbox" />
+  </div>
+
+  <div>
+    <label>Descripción</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <button type="submit">Guardar</button>
+</form>

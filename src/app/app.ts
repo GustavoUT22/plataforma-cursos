@@ -1,18 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Header } from "./shared/components/header/header";
+import { Footer } from "./shared/components/footer/footer";
 import { RouterOutlet } from '@angular/router';
-import { CourseList } from './features/courses/course-list/course-list';
-import { CourseForm } from './features/courses/course-form/course-form';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, CourseList, CourseForm],
+  imports: [Header, Footer, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  
-
 }
 
 
