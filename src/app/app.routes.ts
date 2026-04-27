@@ -12,22 +12,23 @@ import { CourseForm } from './features/courses/course-form/course-form';
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
   },
   {
     path: 'courses',
-    component: CourseList
-  },
-  {
-    path: 'courses/:id',
-    component: CourseDetail
+    component: CourseList,
   },
   {
     path: 'courses/new',
-    component: CourseForm
+    component: CourseForm,
   },
   {
+    path: 'courses/:id',
+    component: CourseDetail,
+  },
+
+  {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];
