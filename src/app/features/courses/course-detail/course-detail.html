@@ -1,12 +1,22 @@
-<h1>Detalle de curso</h1>
+<section class="course-detail">
+  <h1 class="title">Detalle de curso</h1>
 
-<h2>{{ course.name }}</h2>
-<p>Categoría: {{ course.category }}</p>
-<p>Docente: {{ course.teacher }}</p>
-<p>Modalidad: {{ course.modality }}</p>
-<p>Duración: {{ course.duration }} horas</p>
-<p>Vacantes: {{ course.vacancies }}</p>
-<p>Costo: {{ course.price }}</p>
-<p>Fecha de inicio: {{ course.startDate | date: 'dd/mm/yyyy' }}</p>
-<p>Estado: {{ course.isActive ? 'Activo' : 'Inactivo' }}</p>
-<p>Descripción: {{ course.description }}</p>
+  <div class="card">
+    <h2>{{ course.name }}</h2>
+    <p class="description">{{ course.description }}</p>
+
+    <p><strong>Categoría:</strong> {{ course.category }}</p>
+    <p><strong>Docente:</strong> {{ course.teacher }}</p>
+    <p><strong>Modalidad:</strong> {{ course.modality }}</p>
+    <p><strong>Duración:</strong> {{ course.duration }} horas</p>
+    <p><strong>Vacantes:</strong> {{ course.vacancies }}</p>
+    <p><strong>Costo:</strong> {{ course.price }}</p>
+    <p><strong>Inicio:</strong> {{ course.startDate | date: 'dd/MM/yyyy' }}</p>
+    <p>
+      <strong>Estado:</strong>
+      <span class="status" [class.active]="course.isActive">
+        {{ course.isActive ? 'Activo' : 'Inactivo' }}
+      </span>
+    </p>
+  </div>
+</section>

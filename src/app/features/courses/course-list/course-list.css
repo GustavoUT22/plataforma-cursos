@@ -1,3 +1,14 @@
+.course-list {
+  max-width: 1024px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
 
 .courses-wrapper {
   display: flex;

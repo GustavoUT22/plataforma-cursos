@@ -1,10 +1,11 @@
-<h2>Este es el formulario de creación de una tarea</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
+  <h2>Formulario de creación de una tarea</h2>
+
+  <div class="campo">
     <label>Nombre</label>
     <input formControlName="name" placeholder="Curso de Angular básico" />
     @if (form.get('name')?.touched && form.get('name')?.invalid) {
-      <small style="color: red">
+      <small class="error">
         @if (form.get('name')?.errors?.['required']) {
           El nombre es obligatorio
         }
@@ -15,51 +16,51 @@
     }
   </div>
 
-  <div>
+  <div class="campo">
     <label>Categoría</label>
     <input formControlName="category" placeholder="Programación, Diseño, Marketing" />
   </div>
 
-  <div>
+  <div class="campo">
     <label>Docente</label>
     <input formControlName="teacher" placeholder="Juan Pérez" />
   </div>
 
-  <div>
+  <div class="campo">
     <label>Modalidad</label>
-    <select formControlName="modality">
+    <select class="modalidad" formControlName="modality">
       <option value="" disabled selected>Seleccione una modalidad</option>
       <option value="Presencial">Presencial</option>
       <option value="Online">Online</option>
     </select>
   </div>
 
-  <div>
+  <div class="campo">
     <label>Duración (horas)</label>
     <input formControlName="duration" type="number" placeholder="40" />
   </div>
 
-  <div>
+  <div class="campo">
     <label>Vacantes</label>
     <input formControlName="vacancies" type="number" placeholder="25" />
   </div>
 
-  <div>
+  <div class="campo">
     <label>Costo</label>
     <input formControlName="price" type="number" placeholder="150.00" />
   </div>
 
-  <div>
+  <div class="campo">
     <label>Fecha de inicio</label>
     <input formControlName="startDate" type="date" placeholder="Seleccione una fecha" />
   </div>
 
-  <div>
-    <label>Activo</label>
+  <div class="activo">
     <input formControlName="isActive" type="checkbox" />
+    <label>Activo</label>
   </div>
 
-  <div>
+  <div class="campo">
     <label>Descripción</label>
     <textarea
       formControlName="description"
