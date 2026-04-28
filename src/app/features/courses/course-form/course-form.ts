@@ -16,16 +16,20 @@ export class CourseForm implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100),
+      ]),
       category: new FormControl('', [Validators.required]),
-      teacher: new FormControl('', [Validators.required]),
+      teacher: new FormControl('', [Validators.required, Validators.minLength(2)]),
       modality: new FormControl('Presencial', [Validators.required]),
-      duration: new FormControl(0),
-      vacancies: new FormControl(0),
-      price: new FormControl(0),
+      duration: new FormControl(0, [Validators.min(0), Validators.max(500)]),
+      vacancies: new FormControl(0, [Validators.min(0), Validators.max(1000)]),
+      price: new FormControl(0, [Validators.min(0)]),
       startDate: new FormControl('', [Validators.required]),
       isActive: new FormControl(true, [Validators.required]),
-      description: new FormControl(''),
+      description: new FormControl('', [Validators.maxLength(500)]),
     });
   }
 
@@ -38,7 +42,7 @@ export class CourseForm implements OnInit {
       ...this.form.value,
       startDate: new Date(this.form.value.startDate),
     };
-    
+
     console.log(newCourse);
     this.courseService.createCourse(newCourse);
 
