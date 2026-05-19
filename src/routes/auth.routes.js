@@ -5,13 +5,13 @@ const express = require("express");
 const router = express.Router();
 
 // Importamos los controladores que asignaremos a las rutas
-const { getUsers, register, login } = require("../controllers/authController");
+const {getUsers, login, register} = require("../controllers/auth.controller")
 
 // Definimos rutas y que controllers aplicarán cada una de las rutas
 // router.get("/users", getUsers)
-router.post("/register", register)
-router.post("/login", login)
-router.get("/users", getUsers)
+router.post("/register", register);
+router.post("/login", login);
+router.get("/users", getUsers);
 
 // Exportamos las rutas ya definidas
 module.exports = router;

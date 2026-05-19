@@ -40,7 +40,14 @@ exports.register = async (req, res) => {
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users)
+        const formattedUsers = users.map(user => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }));
+
+    res.json(formattedUsers);
   } catch (error) {
     res.status(500).json({
       message: error.message
@@ -50,31 +57,46 @@ exports.getUsers = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password} = req.body;
 
-    const user = User.findOne({email});
-    if (!user){
-      return res.status(401),json({message: "El email o contraseña es inválido"})
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        message: "El email o contraseña es inválido"
+      });
     }
 
-    const validPassword = bcrypt.compare(password, user.password)
-    if (!validPassword){
-      return res.status(401),json({message: "El email o contraseña es inválido"})
+    const validPassword = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!validPassword) {
+      return res.status(401).json({
+        message: "El email o contraseña es inválido"
+      });
     }
-    // generamos el token de acceso con tiempo de expiración
+
     const token = jwt.sign(
-      {id: user._id, role: user.role},
+      {
+        id: user._id,
+        role: user.role
+      },
       process.env.JWT_SECRET,
-      { expiresIn: '4h'}
-    )
+      {
+        expiresIn: '4h'
+      }
+    );
 
     res.json({
       message: 'Login exitoso',
       token
     });
+
   } catch (error) {
     res.status(500).json({
       message: error.message
-    })
+    });
   }
 }
