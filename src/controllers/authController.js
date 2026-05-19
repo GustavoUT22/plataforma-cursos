@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-exports.createUser = async (req, res) => {
+exports.register = async (req, res) => {
   try {
     const {name, email, password, role} = req.body;
     // const userExists = await User.findOne({email: req.body.email})
