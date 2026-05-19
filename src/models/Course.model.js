@@ -10,16 +10,14 @@ const courseSchema = new mongoose.Schema({
       required: true,
   },
   teacher: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
   category: {
       type: String,
       required: true,
   }
-})
-
-
+}, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema);

@@ -1,27 +1,27 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
 require('dotenv').config();
+const express = require('express');
+const cors = require('cors');  
+const helmet = require('helmet');
 
-const conectarDB = require('./config/db');
-const usuarioRoutes = require('./routes/usuarioRoutes');
-
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/auth.routes');
+console.log("URI:", process.env.MONGO_URI);
 const app = express();
 
 app.use(helmet());
 app.use(cors());
-app.use(express.json({ limit: '10kb' }));
+const PORT = process.env.PORT || 3000;
 
-async function iniciarServidor() {
-  await conectarDB();
+connectDB();
 
-  app.use('/api', usuarioRoutes);
+app.use(express.json());
 
-  const PORT = process.env.PORT || 27017;
+app.use('/api/auth', authRoutes);
 
-  app.listen(PORT, () => {
-    console.log(`Servidor ejecutandose en puerto ${PORT}`);
-  });
-}
+app.get('/', (req, res) => {
+  res.json({ message: 'API corriendo correctamente' });
+});
 
-iniciarServidor();
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
