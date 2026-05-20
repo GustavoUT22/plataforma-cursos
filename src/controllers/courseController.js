@@ -48,7 +48,45 @@ const getCourses = async (req, res) => {
     }
 };
 
+const updateCourse = async (req, res) => {
+  try {
+    const { name, description, teacher, category } = req.body;
+
+    const course = await Course.findByIdAndUpdate(
+      req.params.id,
+      { name, description, teacher, category },
+      { new: true, runValidators: true }
+    );
+
+    if (!course) {
+      return res.status(404).json({ message: 'Curso no encontrado' });
+    }
+
+    res.json({
+      message: 'Curso actualizado correctamente',
+      course
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteCourse = async (req, res) => {
+  try {
+    const course = await Course.findByIdAndDelete(req.params.id);
+    if (!course) {
+      return res.status(404).json({ message: 'Curso no encontrado' });
+    }
+
+    res.json({ message: 'Curso eliminado correctamente' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
     createCourse,
-    getCourses
+    getCourses,
+    deleteCourse,
+    updateCourse
 };
