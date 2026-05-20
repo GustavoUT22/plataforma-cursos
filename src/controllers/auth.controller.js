@@ -10,12 +10,12 @@ exports.register = async (req, res) => {
     // const userExists = await User.findOne({email: req.body.email})
     const userExists = await User.findOne({email});
     if (userExists){
-      return res.status(400)
+      return res.status(401)
         .json({ message: 'El email ya ha sido usado' });
     }
 
     if (!rolesAvailable.includes(role)){
-      return res.status(400)
+      return res.status(401)
         .json({ message: `El rol ${role} no es válido`});
     }
 
@@ -40,7 +40,7 @@ exports.register = async (req, res) => {
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find();
-        const formattedUsers = users.map(user => ({
+    const formattedUsers = users.map(user => ({
       id: user._id,
       name: user.name,
       email: user.email,
