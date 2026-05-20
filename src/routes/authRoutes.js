@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // Importamos los controladores que asignaremos a las rutas
-const {getUsers, login, register} = require("../controllers/auth.controller")
+const {getUsers, login, register} = require("../controllers/authController")
 
 // Definimos rutas y que controllers aplicarán cada una de las rutas
 // router.get("/users", getUsers)

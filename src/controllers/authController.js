@@ -1,6 +1,6 @@
 const { rolesAvailable } = require('../utils/rolesAvailable');
 const mongoose = require('mongoose');
-const User = require("../models/user.model");
+const User = require("../models/User.model");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

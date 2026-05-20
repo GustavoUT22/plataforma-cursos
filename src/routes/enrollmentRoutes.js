@@ -1,10 +1,10 @@
 // src/routes/enrollmentRoutes.js
 const express = require('express');
 const router = express.Router();
-const { inscribirCurso, obtenerMisCursos } = require('../controllers/enrollmentController');
+const { enrollmentCourse, getMyCourses } = require('../controllers/enrollmentController');
 
-router.post('/inscripciones', inscribirCurso);
+router.post('/enrollments', enrollmentCourse);
 
-router.get('/inscripciones/estudiante/:estudianteId', obtenerMisCursos);
+router.get('/enrollments/student/:studentId', getMyCourses);
 
 module.exports = router;

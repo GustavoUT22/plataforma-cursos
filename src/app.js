@@ -4,7 +4,10 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const connectDB = require('./config/db');
-const authRoutes = require('./routes/auth.routes');
+const authRoutes = require('./routes/authRoutes');
+const courseRoutes = require("./routes/courseRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
+
 console.log("URI:", process.env.MONGO_URI);
 const app = express();
 
@@ -16,7 +19,10 @@ connectDB();
 
 app.use(express.json( {limit: '10kb'}));
 
-app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes);
+app.use('/api', courseRoutes);
+app.use('/api', enrollmentRoutes);
+
 
 app.get('/', (req, res) => {
   res.json({ message: 'API corriendo correctamente' });
