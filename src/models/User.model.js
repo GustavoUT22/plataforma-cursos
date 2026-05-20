@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { rolesAvailable } = require('../utils/rolesAvailable');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -20,10 +21,9 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: {
-            values: ["Admin", "Docente", "Estudiante"],
-            message: '{VALUE} no es un rol válido'
+          values: rolesAvailable
         },
-        default: "Estudiante"
+        default: "student"
     }
 }, {
     timestamps: true 
