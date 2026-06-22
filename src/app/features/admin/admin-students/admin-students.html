@@ -93,198 +93,46 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div class="avatar" aria-hidden="true">CG</div>
-              <div class="user-info">
-                <div class="name">Carlos García</div>
-                <div class="sub">cgarcia@edutech.pe</div>
+        @for (user of users(); track user._id) {
+          <tr>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" aria-hidden="true">CG</div>
+                <div class="user-info">
+                  <div class="name">{{ user.name }}</div>
+                  <div class="sub">{{ user.email }}</div>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>Ing. de Sistemas</td>
-          <td>3</td>
-          <td>1</td>
-          <td>10 ene 2024</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Ver perfil"
-                aria-label="Ver perfil"
-              >
-                👁️
-              </button>
-              <button class="btn btn-ghost btn-icon btn-sm" title="Editar" aria-label="Editar">
-                ✏️
-              </button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Suspender"
-                aria-label="Suspender"
-                style="color: var(--warning-600)"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div
-                class="avatar"
-                style="background: linear-gradient(135deg, #7c3aed, #ec4899)"
-                aria-hidden="true"
-              >
-                AL
+            </td>
+            <td>Ing. de Sistemas</td>
+            <td>3</td>
+            <td>1</td>
+            <td>10 ene 2024</td>
+            <td><span class="badge badge-success">Activo</span></td>
+            <td>
+              <div class="td-actions">
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  title="Ver perfil"
+                  aria-label="Ver perfil"
+                >
+                  👁️
+                </button>
+                <button class="btn btn-ghost btn-icon btn-sm" title="Editar" aria-label="Editar">
+                  ✏️
+                </button>
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  title="Suspender"
+                  aria-label="Suspender"
+                  style="color: var(--warning-600)"
+                >
+                  🔕
+                </button>
               </div>
-              <div class="user-info">
-                <div class="name">Andrea López</div>
-                <div class="sub">alopez@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Ing. Informática</td>
-          <td>2</td>
-          <td>2</td>
-          <td>15 ene 2024</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Ver perfil"
-                aria-label="Ver perfil"
-              >
-                👁️
-              </button>
-              <button class="btn btn-ghost btn-icon btn-sm" title="Editar" aria-label="Editar">
-                ✏️
-              </button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Suspender"
-                aria-label="Suspender"
-                style="color: var(--warning-600)"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div
-                class="avatar"
-                style="background: linear-gradient(135deg, #059669, #0891b2)"
-                aria-hidden="true"
-              >
-                RM
-              </div>
-              <div class="user-info">
-                <div class="name">Roberto Méndez</div>
-                <div class="sub">rmendez@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Ing. de Software</td>
-          <td>1</td>
-          <td>0</td>
-          <td>20 feb 2024</td>
-          <td><span class="badge badge-warning">Pendiente</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-success btn-sm" aria-label="Aprobar estudiante">
-                Aprobar
-              </button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Ver perfil"
-                aria-label="Ver perfil"
-              >
-                👁️
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div
-                class="avatar"
-                style="background: linear-gradient(135deg, #d97706, #f59e0b)"
-                aria-hidden="true"
-              >
-                SC
-              </div>
-              <div class="user-info">
-                <div class="name">Sofía Castillo</div>
-                <div class="sub">scastillo@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Ing. de Sistemas</td>
-          <td>4</td>
-          <td>3</td>
-          <td>05 feb 2024</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Ver perfil"
-                aria-label="Ver perfil"
-              >
-                👁️
-              </button>
-              <button class="btn btn-ghost btn-icon btn-sm" title="Editar" aria-label="Editar">
-                ✏️
-              </button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                title="Suspender"
-                aria-label="Suspender"
-                style="color: var(--warning-600)"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div class="avatar" style="background: var(--gray-400)" aria-hidden="true">MF</div>
-              <div class="user-info">
-                <div class="name">Miguel Flores</div>
-                <div class="sub">mflores@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Ing. Informática</td>
-          <td>1</td>
-          <td>0</td>
-          <td>01 mar 2024</td>
-          <td><span class="badge badge-danger">Suspendido</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-ghost btn-sm" aria-label="Reactivar estudiante">
-                Reactivar
-              </button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                style="color: var(--danger-600)"
-                aria-label="Eliminar"
-              >
-                🗑️
-              </button>
-            </div>
-          </td>
-        </tr>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
