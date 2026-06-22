@@ -26,28 +26,28 @@
       <div class="stat-icon blue" aria-hidden="true">👥</div>
       <div class="stat-content">
         <div class="stat-label">Total registrados</div>
-        <div class="stat-value">1,240</div>
+        <div class="stat-value">{{ allLenghtUsers }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon green" aria-hidden="true">✅</div>
       <div class="stat-content">
         <div class="stat-label">Activos</div>
-        <div class="stat-value">1,180</div>
+        <div class="stat-value">{{ allActives }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon yellow" aria-hidden="true">⏳</div>
       <div class="stat-content">
         <div class="stat-label">Pendientes</div>
-        <div class="stat-value">43</div>
+        <div class="stat-value">{{ allPending }}</div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon red" aria-hidden="true">🚫</div>
       <div class="stat-content">
         <div class="stat-label">Suspendidos</div>
-        <div class="stat-value">17</div>
+        <div class="stat-value">{{ allSuspended }}</div>
       </div>
     </div>
   </div>
@@ -94,11 +94,11 @@
       </thead>
       <tbody>
         @for (user of users(); track user._id) {
-          <tr>
+          <tr style="text-align: center">
             <td>
               <div class="user-cell">
                 <div class="avatar" aria-hidden="true">CG</div>
-                <div class="user-info">
+                <div class="user-info" style="text-align: left">
                   <div class="name">{{ user.name }}</div>
                   <div class="sub">{{ user.email }}</div>
                 </div>
@@ -107,7 +107,9 @@
             <td>Ing. de Sistemas</td>
             <td>3</td>
             <td>1</td>
-            <td>10 ene 2024</td>
+            <td>
+              <strong style="color: #787878">{{ user.createdAt | date: 'dd/MM/yyyy' }}</strong>
+            </td>
             <td>
               <span
                 class="badge"
