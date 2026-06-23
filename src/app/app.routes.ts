@@ -9,22 +9,10 @@ import { AdminCourses } from './features/admin/admin-courses/admin-courses';
 import { AdminStudents } from './features/admin/admin-students/admin-students';
 import { AdminTeachers } from './features/admin/admin-teachers/admin-teachers';
 
-// definimos rutas de la aplicación
-/**
- * Home -> Donde se verán todos los cursos, crear nuevos cursos y eliminar cursos.
- * Detalle curso -> Donde se verá el detalle de un curso y poder editarlo.
- */
 export const routes: Routes = [
   {
-    path: 'admin',
-    component: AdminLayout,
-    children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminDashboard },
-      { path: 'courses', component: AdminCourses },
-      { path: 'students', component: AdminStudents },
-      { path: 'teachers', component: AdminTeachers },
-    ],
+    path: '',
+    component: Home,
   },
   {
     path: 'courses',
@@ -38,7 +26,17 @@ export const routes: Routes = [
     path: 'courses/:id',
     component: CourseDetail,
   },
-
+  {
+    path: 'admin',
+    component: AdminLayout,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboard },
+      { path: 'courses', component: AdminCourses },
+      { path: 'students', component: AdminStudents },
+      { path: 'teachers', component: AdminTeachers },
+    ],
+  },
   {
     path: '**',
     redirectTo: '',
