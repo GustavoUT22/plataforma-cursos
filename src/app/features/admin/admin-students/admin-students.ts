@@ -27,7 +27,6 @@ export class AdminStudents implements OnInit {
   get allLenghtUsers() {
     return this.users().length;
   }
-
   ngOnInit(): void {
     this.userService.getUsers().subscribe({
       next: (data) => {
