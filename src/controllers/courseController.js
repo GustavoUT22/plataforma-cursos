@@ -48,6 +48,35 @@ const getCourses = async (req, res) => {
     }
 };
 
+
+const getCourseById = async (req, res) => {
+    try {
+      const {id} = req.params;
+      const course = await Course.findById(id).populate('teacher', 'name email');
+
+      if(!course) {
+        return res.status(404).json({
+          message: 'Curso NO encontrado'
+        });
+      }
+
+      res.status(200).json({
+        status: 'success',
+        results: course.length,
+        data: course
+
+      });
+
+      
+      
+    } catch (error) {
+      res.status(500).json({
+        message: 'Error al obtener el curso seleccionado',
+        error: error.message
+      });
+    }
+}
+
 const updateCourse = async (req, res) => {
   try {
     const { name, description, teacher, category } = req.body;
@@ -87,6 +116,7 @@ const deleteCourse = async (req, res) => {
 module.exports = {
     createCourse,
     getCourses,
+    getCourseById,
     deleteCourse,
     updateCourse
 };
