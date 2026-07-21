@@ -2,6 +2,10 @@
   "name": "courses-management",
   "version": "1.0.0",
   "main": "src/app.js",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",

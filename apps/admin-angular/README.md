@@ -39,14 +39,14 @@ Antes de comenzar, asegúrate de tener instalado:
 
 | Herramienta | Versión recomendada |
 |-------------|---------------------|
-| Node.js     | >= 18.x             |
-| npm         | >= 9.x              |
+| Node.js     | >= 20.x             |
+| pnpm        | >= 11.x             |
 | Angular CLI | >= 17.x             |
 
 Para instalar Angular CLI globalmente:
 
 ```bash
-npm install -g @angular/cli
+pnpm add -g @angular/cli
 ```
 
 ---
@@ -63,7 +63,7 @@ cd course-app
 2. **Instala las dependencias:**
 
 ```bash
-npm install
+pnpm install
 ```
 
 ---

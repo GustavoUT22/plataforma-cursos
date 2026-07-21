@@ -1,0 +1,7 @@
+# Dependencias con scripts de instalación necesarios para compilar Angular.
+# Sin esto pnpm los bloquea y el build falla (esbuild no descarga su binario).
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
