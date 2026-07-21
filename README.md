@@ -39,10 +39,16 @@ bcrypt · Helmet · CORS.
 
 | App | URL |
 |-----|-----|
-| API (Render) | _pendiente de completar_ |
+| API (Render) | https://plataforma-cursos-4ipc.onrender.com |
 | Panel Angular (Vercel) | _pendiente de completar_ |
 | Portal React (Vercel) | _pendiente de completar_ |
 | Landing Next.js (Vercel) | _pendiente de completar_ |
+
+Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/api`
+
+> El plan gratuito de Render suspende el servicio tras 15 minutos sin tráfico. La
+> primera petición después de ese tiempo puede tardar ~50 segundos en responder
+> mientras el servicio despierta; no es un error.
 
 ## Video de sustentación
 
