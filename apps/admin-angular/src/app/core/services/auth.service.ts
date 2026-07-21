@@ -15,6 +15,16 @@ export class AuthService {
     });
   }
 
+  register(name: string, email: string, password: string, role: string = 'student') {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, {
+      name,
+      email,
+      password,
+      role,
+      status: 'active',
+    });
+  }
+
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
