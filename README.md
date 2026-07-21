@@ -39,10 +39,16 @@ bcrypt · Helmet · CORS.
 
 | App | URL |
 |-----|-----|
-| API (Render) | _pendiente de completar_ |
+| API (Render) | https://plataforma-cursos-4ipc.onrender.com |
 | Panel Angular (Vercel) | _pendiente de completar_ |
 | Portal React (Vercel) | _pendiente de completar_ |
 | Landing Next.js (Vercel) | _pendiente de completar_ |
+
+Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/api`
+
+> El plan gratuito de Render suspende el servicio tras 15 minutos sin tráfico. La
+> primera petición después de ese tiempo puede tardar ~50 segundos en responder
+> mientras el servicio despierta; no es un error.
 
 ## Video de sustentación
 
@@ -61,7 +67,7 @@ _Enlace de YouTube: pendiente de completar._
 
 ## Credenciales de prueba
 
-> Se generan al ejecutar la semilla (`npm run seed` en `backend/`). No son secretos reales.
+> Se generan al ejecutar la semilla (`pnpm seed` en `backend/`). No son secretos reales.
 
 | Rol | Email | Contraseña |
 |-----|-------|------------|
@@ -75,14 +81,18 @@ La semilla también crea 3 cursos de ejemplo y una inscripción del estudiante a
 
 ## Instalación y ejecución (local)
 
+> **Gestor de paquetes: `pnpm`** (v11+). Todos los proyectos del monorepo lo usan —
+> no mezcles `npm install`, generaría un `package-lock.json` que no debe subirse.
+> Instalación: `npm install -g pnpm` o `corepack enable`.
+
 ### Backend
 
 ```bash
 cd backend
-npm install
+pnpm install
 cp .env.example .env      # y completa MONGO_URI y JWT_SECRET
-npm run seed              # carga usuarios y cursos de prueba (opcional)
-npm start                 # API en http://localhost:3000
+pnpm seed              # carga usuarios y cursos de prueba (opcional)
+pnpm start                 # API en http://localhost:3000
 ```
 
 Variables de entorno (ver `backend/.env.example`):
@@ -98,8 +108,8 @@ Variables de entorno (ver `backend/.env.example`):
 
 ```bash
 cd apps/admin-angular
-npm install
-npm start                 # http://localhost:4200
+pnpm install
+pnpm start                 # http://localhost:4200
 ```
 
 ---

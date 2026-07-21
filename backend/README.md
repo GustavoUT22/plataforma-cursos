@@ -62,7 +62,7 @@ cd Gestion-de-Cursos-e-Inscripciones
 ### 2. Instalar dependencias
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Configurar variables de entorno
@@ -79,7 +79,7 @@ JWT_SECRET=una_clave_secreta_muy_larga_y_segura
 ### 4. Ejecutar el servidor
 
 ```bash
-node src/app.js | npm start
+node src/app.js | pnpm start
 ```
 
 El servidor estará disponible en `http://localhost:3000`

@@ -1,141 +1,178 @@
- <main class="auth-page" role="main" style="padding:var(--space-12) var(--space-4);">
-    <div class="auth-card" style="max-width:560px;">
+<main class="auth-page" role="main" style="padding: var(--space-12) var(--space-4)">
+  <div class="auth-card" style="max-width: 560px">
+    <!-- Logo -->
+    <div class="auth-logo">
+      <div class="logo-icon" aria-hidden="true">✨</div>
+      <h1>Crear cuenta</h1>
+      <p>Regístrate gratis y empieza a aprender hoy mismo</p>
+    </div>
 
-      <!-- Logo -->
-      <div class="auth-logo">
-        <div class="logo-icon" aria-hidden="true">✨</div>
-        <h1>Crear cuenta</h1>
-        <p>Regístrate gratis y empieza a aprender hoy mismo</p>
+    <!-- Error message -->
+    @if (errorMessage) {
+      <div class="alert alert-error" role="alert" style="margin-bottom: var(--space-5)">
+        <span class="alert-icon" aria-hidden="true">❌</span>
+        <div class="alert-content">
+          <div class="alert-title">Error</div>
+          <div>{{ errorMessage }}</div>
+        </div>
+      </div>
+    }
+
+    <!-- Formulario -->
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      aria-label="Formulario de registro"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="name" class="form-label"
+          >Nombre completo <span class="required" aria-hidden="true">*</span></label
+        >
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [class.is-invalid]="
+            registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || submitted)
+          "
+          placeholder="Ej. Carlos García"
+          autocomplete="name"
+        />
+        @if (
+          registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || submitted)
+        ) {
+          <small class="form-error">
+            @if (registerForm.get('name')?.errors?.['required']) {
+              El nombre es obligatorio
+            } @else if (registerForm.get('name')?.errors?.['minlength']) {
+              El nombre debe tener al menos 2 caracteres
+            }
+          </small>
+        }
       </div>
 
-      <!-- Formulario -->
-      <form action="dashboard-estudiante.html" method="get" aria-label="Formulario de registro" novalidate>
-
-        <div class="form-row cols-2">
-          <div class="form-group">
-            <label for="nombre" class="form-label">Nombre <span class="required" aria-hidden="true">*</span></label>
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              class="form-control"
-              placeholder="Ej. Carlos"
-              autocomplete="given-name"
-              required
-              aria-required="true"
-            />
-          </div>
-          <div class="form-group">
-            <label for="apellidos" class="form-label">Apellidos <span class="required" aria-hidden="true">*</span></label>
-            <input
-              type="text"
-              id="apellidos"
-              name="apellidos"
-              class="form-control"
-              placeholder="Ej. García López"
-              autocomplete="family-name"
-              required
-              aria-required="true"
-            />
-          </div>
+      <div class="form-group">
+        <label for="email" class="form-label"
+          >Correo electrónico <span class="required" aria-hidden="true">*</span></label
+        >
+        <div class="input-wrapper">
+          <span class="input-icon" aria-hidden="true">✉️</span>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('email')?.invalid &&
+              (registerForm.get('email')?.touched || submitted)
+            "
+            placeholder="tu&#64;correo.edu.pe"
+            autocomplete="email"
+          />
         </div>
+        @if (
+          registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || submitted)
+        ) {
+          <small class="form-error">
+            @if (registerForm.get('email')?.errors?.['required']) {
+              El correo electrónico es obligatorio
+            } @else if (registerForm.get('email')?.errors?.['invalidEmail']) {
+              Ingresa un correo electrónico válido (ej: correo&#64;dominio.com)
+            }
+          </small>
+        }
+      </div>
 
-        <div class="form-group">
-          <label for="email" class="form-label">Correo electrónico <span class="required" aria-hidden="true">*</span></label>
-          <div class="input-wrapper">
-            <span class="input-icon" aria-hidden="true">✉️</span>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              placeholder="tu@correo.edu.pe"
-              autocomplete="email"
-              required
-              aria-required="true"
-            />
-          </div>
-          <p class="form-hint">Usa tu correo institucional si tienes acceso al plan universitario.</p>
+      <div class="form-group">
+        <label for="password" class="form-label"
+          >Contraseña <span class="required" aria-hidden="true">*</span></label
+        >
+        <div class="input-wrapper">
+          <span class="input-icon" aria-hidden="true">🔒</span>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('password')?.invalid &&
+              (registerForm.get('password')?.touched || submitted)
+            "
+            placeholder="Mínimo 8 caracteres"
+            autocomplete="new-password"
+          />
         </div>
+        @if (
+          registerForm.get('password')?.invalid &&
+          (registerForm.get('password')?.touched || submitted)
+        ) {
+          <small class="form-error">
+            @if (registerForm.get('password')?.errors?.['required']) {
+              La contraseña es obligatoria
+            } @else if (registerForm.get('password')?.errors?.['minlength']) {
+              La contraseña debe tener al menos 8 caracteres
+            }
+          </small>
+        }
+      </div>
 
-        <div class="form-group">
-          <label for="programa" class="form-label">Programa académico</label>
-          <select id="programa" name="programa" class="form-control" aria-label="Seleccionar programa académico">
-            <option value="">— Selecciona tu programa —</option>
-            <option>Ingeniería de Sistemas</option>
-            <option>Ingeniería de Software</option>
-            <option>Ciencias de la Computación</option>
-            <option>Ingeniería Informática</option>
-            <option>Otro</option>
-          </select>
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label"
+          >Confirmar contraseña <span class="required" aria-hidden="true">*</span></label
+        >
+        <div class="input-wrapper">
+          <span class="input-icon" aria-hidden="true">🔒</span>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('confirmPassword')?.invalid &&
+              (registerForm.get('confirmPassword')?.touched || submitted)
+            "
+            placeholder="Repite tu contraseña"
+            autocomplete="new-password"
+          />
         </div>
+        @if (
+          registerForm.get('confirmPassword')?.invalid &&
+          (registerForm.get('confirmPassword')?.touched || submitted)
+        ) {
+          <small class="form-error">
+            @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+              Confirmar la contraseña es obligatorio
+            }
+          </small>
+        }
+      </div>
 
-        <div class="form-group">
-          <label for="password" class="form-label">Contraseña <span class="required" aria-hidden="true">*</span></label>
-          <div class="input-wrapper">
-            <span class="input-icon" aria-hidden="true">🔒</span>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              placeholder="Mínimo 8 caracteres"
-              autocomplete="new-password"
-              required
-              aria-required="true"
-              minlength="8"
-            />
-            <span class="input-suffix" id="toggle-pass" role="button" tabindex="0" aria-label="Mostrar/ocultar contraseña">👁️</span>
-          </div>
-          <p class="form-hint">Usa al menos 8 caracteres, una mayúscula y un número.</p>
+      <div class="form-group" style="margin-bottom: var(--space-6)">
+        <div class="checkbox-group" style="align-items: flex-start; gap: var(--space-3)">
+          <input type="checkbox" id="terms" formControlName="terms" style="margin-top: 3px" />
+          <label for="terms" style="font-size: var(--text-sm); color: var(--gray-700)">
+            Acepto los
+            <a href="#" style="color: var(--primary-600); font-weight: 600">Términos de uso</a> y la
+            <a href="#" style="color: var(--primary-600); font-weight: 600"
+              >Política de privacidad</a
+            >
+            de EduTech Academy.
+          </label>
         </div>
+        @if (
+          registerForm.get('terms')?.invalid && (registerForm.get('terms')?.touched || submitted)
+        ) {
+          <small class="form-error">Debes aceptar los términos y condiciones</small>
+        }
+      </div>
 
-        <div class="form-group">
-          <label for="confirm-password" class="form-label">Confirmar contraseña <span class="required" aria-hidden="true">*</span></label>
-          <div class="input-wrapper">
-            <span class="input-icon" aria-hidden="true">🔒</span>
-            <input
-              type="password"
-              id="confirm-password"
-              name="confirm_password"
-              class="form-control"
-              placeholder="Repite tu contraseña"
-              autocomplete="new-password"
-              required
-              aria-required="true"
-            />
-          </div>
-        </div>
+      <button type="submit" class="btn btn-primary w-full btn-lg" [disabled]="registerForm.invalid">
+        Crear mi cuenta gratis →
+      </button>
+    </form>
 
-        <div class="form-group" style="margin-bottom:var(--space-6);">
-          <div class="checkbox-group" style="align-items:flex-start;gap:var(--space-3);">
-            <input type="checkbox" id="terms" name="terms" required aria-required="true" style="margin-top:3px;" />
-            <label for="terms" style="font-size:var(--text-sm);color:var(--gray-700);">
-              Acepto los <a href="#" style="color:var(--primary-600);font-weight:600;">Términos de uso</a> y la
-              <a href="#" style="color:var(--primary-600);font-weight:600;">Política de privacidad</a> de EduTech Academy.
-            </label>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-full btn-lg">
-          Crear mi cuenta gratis →
-        </button>
-      </form>
-
-      <p class="auth-footer-text">
-        ¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a>
-      </p>
-
-    </div>
-  </main>
-
-  <script>
-    const toggle = document.getElementById('toggle-pass');
-    const passInput = document.getElementById('password');
-    toggle.addEventListener('click', () => {
-      passInput.type = passInput.type === 'password' ? 'text' : 'password';
-    });
-    toggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') toggle.click();
-    });
-  </script>
+    <p class="auth-footer-text">¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a></p>
+  </div>
+</main>

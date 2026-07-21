@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# El monorepo usa pnpm: solo se versiona pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
 # Environment variables (nunca subir secretos)
 .env
 .env.local

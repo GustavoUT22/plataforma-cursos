@@ -44,6 +44,6 @@ __screenshots__/
 Thumbs.db
 
 
-#dependencias
-pnpm-lock.yaml
-pnpm-workspace.yaml
+# El proyecto usa pnpm: pnpm-lock.yaml y pnpm-workspace.yaml SÍ se versionan.
+package-lock.json
+yarn.lock
