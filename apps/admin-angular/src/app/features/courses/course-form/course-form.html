@@ -1,0 +1,140 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Formulario de creación de un curso</h2>
+
+  <div class="campo">
+    <label>Nombre</label>
+    <input formControlName="name" placeholder="Curso de Angular básico" />
+    @if (form.get('name')?.touched && form.get('name')?.invalid) {
+      <small class="error">
+        @if (form.get('name')?.errors?.['required']) {
+          El nombre es obligatorio
+        }
+        @if (form.get('name')?.errors?.['minlength']) {
+          Mínimo 3 caracteres
+        }
+        @if (form.get('name')?.errors?.['maxlength']) {
+          Máximo 100 caracteres
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Categoría</label>
+    <input formControlName="category" placeholder="Programación, Diseño, Marketing" />
+    @if (form.get('category')?.touched && form.get('category')?.invalid) {
+      <small class="error">
+        @if (form.get('category')?.errors?.['required']) {
+          La categoría es obligatoria
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Docente</label>
+    <input formControlName="teacher" placeholder="Juan Pérez" />
+    @if (form.get('teacher')?.touched && form.get('teacher')?.invalid) {
+      <small class="error">
+        @if (form.get('teacher')?.errors?.['required']) {
+          El docente es obligatorio
+        }
+        @if (form.get('teacher')?.errors?.['minlength']) {
+          Mínimo 2 caracteres
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Modalidad</label>
+    <select class="modalidad" formControlName="modality">
+      <option value="" disabled>Seleccione una modalidad</option>
+      <option value="Presencial">Presencial</option>
+      <option value="Online">Online</option>
+    </select>
+    @if (form.get('modality')?.touched && form.get('modality')?.invalid) {
+      <small class="error">
+        @if (form.get('modality')?.errors?.['required']) {
+          La modalidad es obligatoria
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Duración (horas)</label>
+    <input formControlName="duration" type="number" placeholder="40" />
+    @if (form.get('duration')?.touched && form.get('duration')?.invalid) {
+      <small class="error">
+        @if (form.get('duration')?.errors?.['min']) {
+          El valor mínimo es 0
+        }
+        @if (form.get('duration')?.errors?.['max']) {
+          El valor máximo es 500 horas
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Vacantes</label>
+    <input formControlName="vacancies" type="number" placeholder="25" />
+    @if (form.get('vacancies')?.touched && form.get('vacancies')?.invalid) {
+      <small class="error">
+        @if (form.get('vacancies')?.errors?.['min']) {
+          El valor mínimo es 0
+        }
+        @if (form.get('vacancies')?.errors?.['max']) {
+          El valor máximo es 1000 vacantes
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Costo</label>
+    <input formControlName="price" type="number" placeholder="150.00" />
+    @if (form.get('price')?.touched && form.get('price')?.invalid) {
+      <small class="error">
+        @if (form.get('price')?.errors?.['min']) {
+          El costo no puede ser negativo
+        }
+      </small>
+    }
+  </div>
+
+  <div class="campo">
+    <label>Fecha de inicio</label>
+    <input formControlName="startDate" type="date" />
+    @if (form.get('startDate')?.touched && form.get('startDate')?.invalid) {
+      <small class="error">
+        @if (form.get('startDate')?.errors?.['required']) {
+          La fecha de inicio es obligatoria
+        }
+      </small>
+    }
+  </div>
+
+  <div class="activo">
+    <input formControlName="isActive" type="checkbox" />
+    <label>Activo</label>
+  </div>
+
+  <div class="campo">
+    <label>Descripción</label>
+    <textarea
+      formControlName="description"
+      placeholder="Contenido y objetivos del curso"
+    ></textarea>
+    @if (form.get('description')?.touched && form.get('description')?.invalid) {
+      <small class="error">
+        @if (form.get('description')?.errors?.['maxlength']) {
+          Máximo 500 caracteres
+        }
+      </small>
+    }
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>

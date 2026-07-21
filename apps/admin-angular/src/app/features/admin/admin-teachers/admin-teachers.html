@@ -1,0 +1,228 @@
+<main class="main-content">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <span class="separator" aria-hidden="true">›</span>
+    <span class="current">Gestión de docentes</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Gestión de docentes</h1>
+        <p class="page-subtitle">Administra el equipo docente y sus cursos asignados.</p>
+      </div>
+      <button class="btn btn-primary btn-sm">+ Agregar docente</button>
+    </div>
+  </div>
+
+  <!-- Stats docentes -->
+  <div class="grid grid-4" style="margin-bottom: var(--space-6)">
+    <div class="stat-card">
+      <div class="stat-icon purple" aria-hidden="true">👨‍🏫</div>
+      <div class="stat-content">
+        <div class="stat-label">Total docentes</div>
+        <div class="stat-value">12</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green" aria-hidden="true">✅</div>
+      <div class="stat-content">
+        <div class="stat-label">Activos</div>
+        <div class="stat-value">10</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow" aria-hidden="true">⏳</div>
+      <div class="stat-content">
+        <div class="stat-label">Pendientes verificación</div>
+        <div class="stat-value">1</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue" aria-hidden="true">📚</div>
+      <div class="stat-content">
+        <div class="stat-label">Cursos activos</div>
+        <div class="stat-value">48</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards de docentes principales -->
+  <div class="grid grid-3" style="margin-bottom: var(--space-6)">
+    <div class="card" style="text-align: center">
+      <div class="avatar xl" style="margin: 0 auto var(--space-4)" aria-label="Foto de Juan Pérez">
+        JP
+      </div>
+      <h3 style="font-size: var(--text-lg)">Juan Pérez</h3>
+      <p
+        style="
+          font-size: var(--text-sm);
+          color: var(--primary-600);
+          font-weight: 600;
+          margin-bottom: var(--space-3);
+        "
+      >
+        Especialista Frontend
+      </p>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: var(--space-4);
+          margin-bottom: var(--space-4);
+          font-size: var(--text-xs);
+          color: var(--text-muted);
+        "
+      >
+        <span>📚 3 cursos</span>
+        <span>👥 702 alumnos</span>
+        <span>⭐ 4.85</span>
+      </div>
+      <span class="badge badge-success" style="margin-bottom: var(--space-4)">Activo</span>
+      <div style="display: flex; gap: var(--space-2); justify-content: center">
+        <button class="btn btn-ghost btn-sm" aria-label="Ver perfil de Juan Pérez">
+          Ver perfil
+        </button>
+        <button class="btn btn-primary btn-sm" aria-label="Editar Juan Pérez">Editar</button>
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center">
+      <div
+        class="avatar xl"
+        style="margin: 0 auto var(--space-4); background: linear-gradient(135deg, #7c3aed, #ec4899)"
+        aria-label="Foto de María Torres"
+      >
+        MT
+      </div>
+      <h3 style="font-size: var(--text-lg)">María Torres</h3>
+      <p
+        style="
+          font-size: var(--text-sm);
+          color: var(--accent-600);
+          font-weight: 600;
+          margin-bottom: var(--space-3);
+        "
+      >
+        Arquitecta Full Stack
+      </p>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: var(--space-4);
+          margin-bottom: var(--space-4);
+          font-size: var(--text-xs);
+          color: var(--text-muted);
+        "
+      >
+        <span>📚 2 cursos</span>
+        <span>👥 655 alumnos</span>
+        <span>⭐ 4.75</span>
+      </div>
+      <span class="badge badge-success" style="margin-bottom: var(--space-4)">Activo</span>
+      <div style="display: flex; gap: var(--space-2); justify-content: center">
+        <button class="btn btn-ghost btn-sm" aria-label="Ver perfil de María Torres">
+          Ver perfil
+        </button>
+        <button class="btn btn-primary btn-sm" aria-label="Editar María Torres">Editar</button>
+      </div>
+    </div>
+
+    <div class="card" style="text-align: center">
+      <div
+        class="avatar xl"
+        style="margin: 0 auto var(--space-4); background: linear-gradient(135deg, #059669, #0891b2)"
+        aria-label="Foto de Luis Ramírez"
+      >
+        LR
+      </div>
+      <h3 style="font-size: var(--text-lg)">Luis Ramírez</h3>
+      <p
+        style="
+          font-size: var(--text-sm);
+          color: var(--success-600);
+          font-weight: 600;
+          margin-bottom: var(--space-3);
+        "
+      >
+        Ingeniero DevOps
+      </p>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: var(--space-4);
+          margin-bottom: var(--space-4);
+          font-size: var(--text-xs);
+          color: var(--text-muted);
+        "
+      >
+        <span>📚 2 cursos</span>
+        <span>👥 500 alumnos</span>
+        <span>⭐ 4.75</span>
+      </div>
+      <span class="badge badge-success" style="margin-bottom: var(--space-4)">Activo</span>
+      <div style="display: flex; gap: var(--space-2); justify-content: center">
+        <button class="btn btn-ghost btn-sm" aria-label="Ver perfil de Luis Ramírez">
+          Ver perfil
+        </button>
+        <button class="btn btn-primary btn-sm" aria-label="Editar Luis Ramírez">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla completa docentes -->
+  <div class="table-wrapper">
+    <table class="table" aria-label="Tabla completa de docentes">
+      <thead>
+        <tr>
+          <th scope="col">Docente</th>
+          <th scope="col">Especialidad</th>
+          <th scope="col">Cursos</th>
+          <th scope="col">Estudiantes</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Ingreso</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user._id) {
+          <tr>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" aria-hidden="true">JP</div>
+                <div class="user-info">
+                  <div class="name">{{ user.name }}</div>
+                  <div class="sub">{{ user.email }}</div>
+                </div>
+              </div>
+            </td>
+            <td>Frontend · React · Vue</td>
+            <td>3</td>
+            <td>702</td>
+            <td>⭐ 4.85</td>
+            <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="badge badge-success">{{ user.status }}</span>
+            </td>
+            <td>
+              <div class="td-actions">
+                <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
+                <button class="btn btn-ghost btn-icon btn-sm" aria-label="Editar">✏️</button>
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  style="color: var(--warning-600)"
+                  aria-label="Desactivar"
+                >
+                  🔕
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</main>

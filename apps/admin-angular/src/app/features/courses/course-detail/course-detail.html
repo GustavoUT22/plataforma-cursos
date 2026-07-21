@@ -1,0 +1,22 @@
+<section class="course-detail">
+  <h1 class="title">Detalle de curso</h1>
+
+  <div class="card">
+    <h2>{{ course.name }}</h2>
+    <p class="description">{{ course.description }}</p>
+
+    <p><strong>Categoría:</strong> {{ course.category }}</p>
+    <p><strong>Docente:</strong> {{ course.teacher }}</p>
+    <p><strong>Modalidad:</strong> {{ course.modality }}</p>
+    <p><strong>Duración:</strong> {{ course.duration }} horas</p>
+    <p><strong>Vacantes:</strong> {{ course.vacancies }}</p>
+    <p><strong>Costo:</strong> {{ course.price }}</p>
+    <p><strong>Inicio:</strong> {{ course.startDate | date: 'dd/MM/yyyy' }}</p>
+    <p>
+      <strong>Estado:</strong>
+      <span class="status" [class.active]="course.isActive">
+        {{ course.isActive ? 'Activo' : 'Inactivo' }}
+      </span>
+    </p>
+  </div>
+</section>

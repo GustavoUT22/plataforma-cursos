@@ -1,0 +1,160 @@
+<main class="main-content">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a href="admin-dashboard.html">Dashboard</a>
+    <span class="separator" aria-hidden="true">›</span>
+    <span class="current">Gestión de estudiantes</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Gestión de estudiantes</h1>
+        <p class="page-subtitle">
+          Administra las cuentas y el estado de todos los estudiantes registrados.
+        </p>
+      </div>
+      <div style="display: flex; gap: var(--space-3)">
+        <button class="btn btn-ghost btn-sm">📥 Exportar CSV</button>
+        <button class="btn btn-primary btn-sm">+ Nuevo estudiante</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats rápidas -->
+  <div class="grid grid-4" style="margin-bottom: var(--space-6)">
+    <div class="stat-card">
+      <div class="stat-icon blue" aria-hidden="true">👥</div>
+      <div class="stat-content">
+        <div class="stat-label">Total registrados</div>
+        <div class="stat-value">{{ allLenghtUsers }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green" aria-hidden="true">✅</div>
+      <div class="stat-content">
+        <div class="stat-label">Activos</div>
+        <div class="stat-value">{{ allActives }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow" aria-hidden="true">⏳</div>
+      <div class="stat-content">
+        <div class="stat-label">Pendientes</div>
+        <div class="stat-value">{{ allPending }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red" aria-hidden="true">🚫</div>
+      <div class="stat-content">
+        <div class="stat-label">Suspendidos</div>
+        <div class="stat-value">{{ allSuspended }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="card" style="margin-bottom: var(--space-6)">
+    <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap">
+      <div class="search-bar" style="flex: 1; min-width: 200px">
+        <span aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          placeholder="Buscar por nombre, correo, programa..."
+          aria-label="Buscar estudiante"
+        />
+      </div>
+      <select class="form-control" style="width: auto" aria-label="Filtrar por programa">
+        <option>Todos los programas</option>
+        <option>Ing. de Sistemas</option>
+        <option>Ing. de Software</option>
+        <option>Ing. Informática</option>
+      </select>
+      <select class="form-control" style="width: auto" aria-label="Filtrar por estado">
+        <option>Todos los estados</option>
+        <option>Activo</option>
+        <option>Pendiente</option>
+        <option>Suspendido</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-wrapper">
+    <table class="table" aria-label="Tabla de gestión de estudiantes">
+      <thead>
+        <tr>
+          <th scope="col">Estudiante</th>
+          <th scope="col">Programa</th>
+          <th scope="col">Inscripciones</th>
+          <th scope="col">Completados</th>
+          <th scope="col">Fecha registro</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user._id) {
+          <tr style="text-align: center">
+            <td>
+              <div class="user-cell">
+                <div class="avatar" aria-hidden="true">CG</div>
+                <div class="user-info" style="text-align: left">
+                  <div class="name">{{ user.name }}</div>
+                  <div class="sub">{{ user.email }}</div>
+                </div>
+              </div>
+            </td>
+            <td>Ing. de Sistemas</td>
+            <td>3</td>
+            <td>1</td>
+            <td>
+              <strong style="color: #787878">{{ user.createdAt | date: 'dd/MM/yyyy' }}</strong>
+            </td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'badge-success': user.status === 'active',
+                  'badge-warning': user.status === 'pending',
+                  'badge-danger': user.status === 'suspended',
+                }"
+                >{{ user.status }}</span
+              >
+            </td>
+            <td>
+              <div class="td-actions">
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  title="Ver perfil"
+                  aria-label="Ver perfil"
+                >
+                  👁️
+                </button>
+                <button class="btn btn-ghost btn-icon btn-sm" title="Editar" aria-label="Editar">
+                  ✏️
+                </button>
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  title="Suspender"
+                  aria-label="Suspender"
+                  style="color: var(--warning-600)"
+                >
+                  🔕
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="pagination" aria-label="Paginación">
+    <button class="page-btn" disabled>‹</button>
+    <button class="page-btn active" aria-current="page">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">...</button>
+    <button class="page-btn">24</button>
+    <button class="page-btn">›</button>
+  </nav>
+</main>

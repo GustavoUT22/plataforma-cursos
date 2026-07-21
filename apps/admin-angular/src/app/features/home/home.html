@@ -1,0 +1,176 @@
+<main class="page-content">
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          ✦ Plataforma académica certificada
+        </div>
+        <h1 id="hero-heading" class="hero-title">
+          Aprende, crece y<br>
+          <span class="highlight">lidera el futuro</span><br>
+          tecnológico
+        </h1>
+        <p class="hero-subtitle">
+          Formación de calidad universitaria en programación, desarrollo web, backend, bases de datos y más. Accede desde cualquier dispositivo.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/courses" class="btn btn-primary btn-lg">Explorar cursos</a>
+          <a routerLink="/register" class="btn btn-secondary btn-lg" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4);">Crear cuenta gratis</a>
+        </div>
+        <div class="hero-stats" role="list">
+          <div class="hero-stat" role="listitem">
+            <div class="value">1,240+</div>
+            <div class="label">Estudiantes activos</div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="value">48</div>
+            <div class="label">Cursos disponibles</div>
+          </div>
+          <div class="hero-stat" role="listitem">
+            <div class="value">12</div>
+            <div class="label">Docentes expertos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray" id="beneficios" aria-labelledby="beneficios-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">¿Por qué EduTech?</span>
+        <h2 id="beneficios-heading" class="section-title">Todo lo que necesitas para aprender</h2>
+        <p class="section-subtitle">Una plataforma pensada para estudiantes universitarios y profesionales que buscan crecer en tecnología.</p>
+      </div>
+      <div class="grid grid-3">
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--primary-100);">📖</div>
+          <h3>Cursos estructurados</h3>
+          <p>Contenido organizado por módulos, sesiones y actividades prácticas, diseñados por docentes universitarios con experiencia real en la industria.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--accent-100);">🖥️</div>
+          <h3>Acceso multiplataforma</h3>
+          <p>Estudia desde tu computador, tablet o celular. Tu progreso se sincroniza automáticamente en todos tus dispositivos.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--success-100);">🏆</div>
+          <h3>Certificados reconocidos</h3>
+          <p>Al completar cada curso obtienes un certificado de finalización con aval académico, útil para tu portafolio profesional.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--warning-100);">⚡</div>
+          <h3>Aprendizaje activo</h3>
+          <p>Ejercicios prácticos, proyectos reales y evaluaciones formativas que refuerzan cada concepto aprendido.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--danger-100);">👥</div>
+          <h3>Comunidad de aprendizaje</h3>
+          <p>Conecta con compañeros y docentes a través de foros, sesiones en vivo y grupos de estudio colaborativo.</p>
+        </article>
+        <article class="benefit-card">
+          <div class="benefit-icon" style="background:var(--primary-100);">📊</div>
+          <h3>Seguimiento de avance</h3>
+          <p>Visualiza tu progreso en tiempo real con métricas claras sobre tu rendimiento, asistencia y finalización de actividades.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cursos-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Cursos destacados</span>
+        <h2 id="cursos-heading" class="section-title">Los más populares este semestre</h2>
+        <p class="section-subtitle">Seleccionados por nuestros docentes y calificados por estudiantes activos.</p>
+      </div>
+      <div class="grid grid-3">
+        @for (course of courses(); track course.id) {
+          <article class="course-card">
+            <div class="course-card-image" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
+              <div class="course-thumb-placeholder">📚</div>
+              <span class="course-card-badge badge badge-primary no-dot">{{ course.category }}</span>
+            </div>
+            <div class="course-card-body">
+              <div class="course-category">{{ course.category }}</div>
+              <h3 class="course-title">{{ course.name }}</h3>
+              <p class="course-instructor">👨‍🏫 {{ course.teacher }}</p>
+              <div class="course-meta">
+                <span class="course-meta-item">🕒 {{ course.duration }} horas</span>
+                <span class="course-meta-item">📱 {{ course.modality }}</span>
+                <span class="course-meta-item">👥 {{ course.vacancies }} vacantes</span>
+              </div>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-price"><span class="currency">S/</span> {{ course.price }}</div>
+              <a [routerLink]="['/courses', course.id]" class="btn btn-primary btn-sm">Ver curso</a>
+            </div>
+          </article>
+        } @empty {
+          <p style="text-align:center;color:var(--text-muted);grid-column:1/-1;">No hay cursos disponibles aún.</p>
+        }
+      </div>
+
+      <div style="text-align:center;margin-top:var(--space-10);">
+        <a routerLink="/courses" class="btn btn-secondary btn-lg">Ver todos los cursos →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray" aria-labelledby="docentes-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Nuestro equipo</span>
+        <h2 id="docentes-heading" class="section-title">Docentes expertos en tecnología</h2>
+        <p class="section-subtitle">Profesionales activos en la industria que comparten su experiencia real.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card" style="text-align:center;">
+          <div class="avatar xl" style="margin:0 auto var(--space-4);">JP</div>
+          <h4>Juan Pérez</h4>
+          <p style="font-size:var(--text-sm);color:var(--primary-600);font-weight:600;margin-bottom:var(--space-2);">Especialista Frontend</p>
+          <p style="font-size:var(--text-sm);">10 años de experiencia en React, Vue y Angular. Ex-developer en startups de Lima.</p>
+          <div style="margin-top:var(--space-4);display:flex;justify-content:center;gap:var(--space-2);">
+            <span class="badge badge-primary no-dot">React</span>
+            <span class="badge badge-accent no-dot">Vue</span>
+            <span class="badge badge-gray no-dot">TypeScript</span>
+          </div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="avatar xl" style="margin:0 auto var(--space-4);background:linear-gradient(135deg,#7c3aed,#ec4899);">MT</div>
+          <h4>María Torres</h4>
+          <p style="font-size:var(--text-sm);color:var(--accent-600);font-weight:600;margin-bottom:var(--space-2);">Arquitecta Full Stack</p>
+          <p style="font-size:var(--text-sm);">Arquitecta de software con enfoque en sistemas distribuidos, MongoDB y microservicios.</p>
+          <div style="margin-top:var(--space-4);display:flex;justify-content:center;gap:var(--space-2);">
+            <span class="badge badge-success no-dot">Node.js</span>
+            <span class="badge badge-primary no-dot">MongoDB</span>
+            <span class="badge badge-gray no-dot">Docker</span>
+          </div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="avatar xl" style="margin:0 auto var(--space-4);background:linear-gradient(135deg,#059669,#0891b2);">LR</div>
+          <h4>Luis Ramírez</h4>
+          <p style="font-size:var(--text-sm);color:var(--success-600);font-weight:600;margin-bottom:var(--space-2);">Ingeniero DevOps</p>
+          <p style="font-size:var(--text-sm);">DevOps engineer con experiencia en AWS, CI/CD pipelines y automatización de infraestructura.</p>
+          <div style="margin-top:var(--space-4);display:flex;justify-content:center;gap:var(--space-2);">
+            <span class="badge badge-warning no-dot">AWS</span>
+            <span class="badge badge-gray no-dot">Kubernetes</span>
+            <span class="badge badge-success no-dot">Terraform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container">
+      <h2 id="cta-heading">¿Listo para comenzar tu formación?</h2>
+      <p>Únete a más de 1,200 estudiantes que ya están construyendo su futuro en tecnología con EduTech Academy.</p>
+      <div style="display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap;">
+        <a routerLink="/register" class="btn btn-lg" style="background:var(--white);color:var(--primary-600);font-weight:700;">Crear cuenta gratuita</a>
+        <a routerLink="/courses" class="btn btn-lg" style="background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.5);">Ver catálogo →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
