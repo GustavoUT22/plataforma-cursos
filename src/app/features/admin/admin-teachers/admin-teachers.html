@@ -188,131 +188,40 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div class="avatar" aria-hidden="true">JP</div>
-              <div class="user-info">
-                <div class="name">Juan Pérez</div>
-                <div class="sub">jperez@edutech.pe</div>
+        @for (user of users(); track user._id) {
+          <tr>
+            <td>
+              <div class="user-cell">
+                <div class="avatar" aria-hidden="true">JP</div>
+                <div class="user-info">
+                  <div class="name">{{ user.name }}</div>
+                  <div class="sub">{{ user.email }}</div>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>Frontend · React · Vue</td>
-          <td>3</td>
-          <td>702</td>
-          <td>⭐ 4.85</td>
-          <td>15 ene 2023</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Editar">✏️</button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                style="color: var(--warning-600)"
-                aria-label="Desactivar"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div
-                class="avatar"
-                style="background: linear-gradient(135deg, #7c3aed, #ec4899)"
-                aria-hidden="true"
-              >
-                MT
+            </td>
+            <td>Frontend · React · Vue</td>
+            <td>3</td>
+            <td>702</td>
+            <td>⭐ 4.85</td>
+            <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="badge badge-success">{{ user.status }}</span>
+            </td>
+            <td>
+              <div class="td-actions">
+                <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
+                <button class="btn btn-ghost btn-icon btn-sm" aria-label="Editar">✏️</button>
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  style="color: var(--warning-600)"
+                  aria-label="Desactivar"
+                >
+                  🔕
+                </button>
               </div>
-              <div class="user-info">
-                <div class="name">María Torres</div>
-                <div class="sub">mtorres@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Full Stack · Node.js · MongoDB</td>
-          <td>2</td>
-          <td>655</td>
-          <td>⭐ 4.75</td>
-          <td>20 ene 2023</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Editar">✏️</button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                style="color: var(--warning-600)"
-                aria-label="Desactivar"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div
-                class="avatar"
-                style="background: linear-gradient(135deg, #059669, #0891b2)"
-                aria-hidden="true"
-              >
-                LR
-              </div>
-              <div class="user-info">
-                <div class="name">Luis Ramírez</div>
-                <div class="sub">lramirez@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>DevOps · AWS · Kubernetes</td>
-          <td>2</td>
-          <td>500</td>
-          <td>⭐ 4.75</td>
-          <td>05 feb 2023</td>
-          <td><span class="badge badge-success">Activo</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Editar">✏️</button>
-              <button
-                class="btn btn-ghost btn-icon btn-sm"
-                style="color: var(--warning-600)"
-                aria-label="Desactivar"
-              >
-                🔕
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-cell">
-              <div class="avatar" style="background: var(--warning-600)" aria-hidden="true">PC</div>
-              <div class="user-info">
-                <div class="name">Patricia Cueva</div>
-                <div class="sub">pcueva@edutech.pe</div>
-              </div>
-            </div>
-          </td>
-          <td>Seguridad · Ethical Hacking</td>
-          <td>0</td>
-          <td>0</td>
-          <td>—</td>
-          <td>02 abr 2024</td>
-          <td><span class="badge badge-warning">Pendiente</span></td>
-          <td>
-            <div class="td-actions">
-              <button class="btn btn-success btn-sm" aria-label="Aprobar docente">Aprobar</button>
-              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Ver perfil">👁️</button>
-            </div>
-          </td>
-        </tr>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
