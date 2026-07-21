@@ -6,8 +6,14 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, role, status } = req.body;
-        // const userExists = await User.findOne({email: req.body.email})
+        const { name, email, password } = req.body;
+
+        if (!name || !email || !password) {
+            return res
+                .status(400)
+                .json({ message: "Nombre, email y contraseña son obligatorios" });
+        }
+
         const userExists = await User.findOne({ email });
         if (userExists) {
             return res
@@ -15,19 +21,15 @@ exports.register = async (req, res) => {
                 .json({ message: "El email ya ha sido usado" });
         }
 
-        if (!rolesAvailable.includes(role)) {
-            return res
-                .status(401)
-                .json({ message: `El rol ${role} no es válido` });
-        }
-
+        // Seguridad: el registro público siempre crea estudiantes.
+        // Los roles teacher/admin se asignan desde el panel administrativo.
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             name,
             email,
             password: hashedPassword,
-            role,
-            status,
+            role: "student",
+            status: "active",
         });
         res.status(201).json({
             message: "Usuario creado con éxito",

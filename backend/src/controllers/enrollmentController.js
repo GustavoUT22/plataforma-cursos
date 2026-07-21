@@ -50,4 +50,26 @@ const getMyCourses = async (req, res) => {
   }
 };
 
-module.exports = { enrollmentCourse, getMyCourses };
+// El estudiante autenticado consulta SUS propias inscripciones (usa el id del token)
+const getMyEnrollments = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+
+    const myEnrollments = await Enrollment.find({ studentId })
+      .populate({
+        path: 'courseId',
+        select: 'name description category',
+        populate: { path: 'teacher', select: 'name email' }
+      });
+
+    res.status(200).json({
+      status: 'success',
+      results: myEnrollments.length,
+      data: myEnrollments
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { enrollmentCourse, getMyCourses, getMyEnrollments };
