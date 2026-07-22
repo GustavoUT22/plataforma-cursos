@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 })
 export class DashboardService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = import.meta.env.NG_APP_API_URL;
 
   private getHeaders() {
     const token = localStorage.getItem('token');

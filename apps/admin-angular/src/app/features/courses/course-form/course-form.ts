@@ -48,17 +48,12 @@ export class CourseForm implements OnInit {
       description: new FormControl('', [Validators.maxLength(500)]),
     });
 
-<<<<<<< HEAD
-    this.courseId = this.route.snapshot.paramMap.get('id');
-    if (this.courseId) {
-=======
     this.loadTeachers();
 
     // El id puede venir por @Input (modal) o por la ruta (página /courses/new)
     const id = this.courseId ?? this.route.snapshot.paramMap.get('id');
     if (id) {
       this.courseId = id;
->>>>>>> 4828cdaa0e894dde8498eb386907b11efa108cc7
       this.isEditMode = true;
       this.courseService.getCourse(id).subscribe({
         next: (res: any) => {

@@ -50,8 +50,6 @@ const getMyCourses = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
-=======
 // Un administrador inscribe a un estudiante en un curso (indicando ambos ids)
 const adminEnrollment = async (req, res) => {
   try {
@@ -91,7 +89,6 @@ const adminEnrollment = async (req, res) => {
 };
 
 // El estudiante autenticado consulta SUS propias inscripciones (usa el id del token)
->>>>>>> 4828cdaa0e894dde8498eb386907b11efa108cc7
 const getMyEnrollments = async (req, res) => {
   try {
     const studentId = req.user.id;
@@ -113,7 +110,6 @@ const getMyEnrollments = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 const getAllEnrollments = async (req, res) => {
   try {
     const enrollments = await Enrollment.find()
@@ -168,7 +164,12 @@ const deleteMyEnrollment = async (req, res) => {
   }
 };
 
-module.exports = { enrollmentCourse, getMyCourses, getMyEnrollments, getAllEnrollments, deleteEnrollment, deleteMyEnrollment };
-=======
-module.exports = { enrollmentCourse, getMyCourses, getMyEnrollments, adminEnrollment };
->>>>>>> 4828cdaa0e894dde8498eb386907b11efa108cc7
+module.exports = {
+  enrollmentCourse,
+  getMyCourses,
+  getMyEnrollments,
+  adminEnrollment,
+  getAllEnrollments,
+  deleteEnrollment,
+  deleteMyEnrollment,
+};

@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
-const { enrollmentCourse, getMyCourses, getMyEnrollments, getAllEnrollments, deleteEnrollment, deleteMyEnrollment } = require('../controllers/enrollmentController');
-=======
-const { enrollmentCourse, getMyCourses, getMyEnrollments, adminEnrollment } = require('../controllers/enrollmentController');
->>>>>>> 4828cdaa0e894dde8498eb386907b11efa108cc7
+const {
+  enrollmentCourse,
+  getMyCourses,
+  getMyEnrollments,
+  adminEnrollment,
+  getAllEnrollments,
+  deleteEnrollment,
+  deleteMyEnrollment,
+} = require('../controllers/enrollmentController');
 const verifyToken = require("../middlewares/auth.middleware");
 const verifyRole = require("../middlewares/role.middleware");
 
