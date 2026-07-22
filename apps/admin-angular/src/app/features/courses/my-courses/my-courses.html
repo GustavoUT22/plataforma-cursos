@@ -1,0 +1,61 @@
+<section class="my-courses">
+  <h1 class="title">Mis cursos inscritos</h1>
+
+  @if (errorMessage()) {
+    <div class="alert alert-error" role="alert" style="margin-bottom: var(--space-5)">
+      <span class="alert-icon" aria-hidden="true">❌</span>
+      <div class="alert-content">
+        <div class="alert-title">Error</div>
+        <div>{{ errorMessage() }}</div>
+      </div>
+    </div>
+    <a routerLink="/courses" class="btn btn-primary">Explorar cursos</a>
+  } @else if (loading()) {
+    <p>Cargando tus cursos...</p>
+  } @else if (enrollments().length === 0) {
+    <p>Aún no te has inscrito a ningún curso.</p>
+    <a routerLink="/courses" class="btn btn-primary">Explorar cursos</a>
+  } @else {
+    <div class="table-wrapper">
+      <table class="table" aria-label="Mis cursos inscritos">
+        <thead>
+          <tr>
+            <th scope="col">Curso</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Docente</th>
+            <th scope="col">Fecha inscripción</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (enrollment of enrollments(); track enrollment._id) {
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <div class="user-info">
+                    <div class="name">{{ enrollment.courseId?.name }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{{ enrollment.courseId?.description }}</td>
+              <td>{{ enrollment.courseId?.teacher?.name || '—' }}</td>
+              <td>{{ (enrollment.enrolledAt || enrollment.createdAt) | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div class="td-actions">
+                  <a [routerLink]="['/courses', enrollment.courseId?._id]" class="btn btn-primary btn-sm">Ver curso</a>
+                  <button
+                    class="btn btn-ghost btn-icon btn-sm"
+                    title="Cancelar inscripción"
+                    aria-label="Cancelar inscripción"
+                    style="color: var(--danger-600)"
+                    (click)="cancelEnrollment(enrollment._id)"
+                  >🗑️</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

@@ -11,7 +11,7 @@
       <p><strong>Modalidad:</strong> {{ c.modality }}</p>
       <p><strong>Duración:</strong> {{ c.duration }} horas</p>
       <p><strong>Vacantes:</strong> {{ c.vacancies }}</p>
-      <p><strong>Costo:</strong> {{ c.price }}</p>
+      <p><strong>Costo:</strong> S/ {{ c.price }}</p>
       <p><strong>Inicio:</strong> {{ c.startDate | date: 'dd/MM/yyyy' }}</p>
       <p>
         <strong>Estado:</strong>
@@ -19,6 +19,25 @@
           {{ c.isActive ? 'Activo' : 'Inactivo' }}
         </span>
       </p>
+
+      @if (isStudent) {
+        <div style="margin-top: 24px;">
+          @if (!enrolled()) {
+            <button
+              class="btn btn-primary"
+              (click)="enroll()"
+              [disabled]="enrolling()"
+            >
+              {{ enrolling() ? 'Inscribiendo...' : 'Inscribirme al curso' }}
+            </button>
+          }
+          @if (message()) {
+            <p style="margin-top: 12px; font-weight: 600; color: var(--success-600);">
+              {{ message() }}
+            </p>
+          }
+        </div>
+      }
     </div>
   </section>
 } @else {

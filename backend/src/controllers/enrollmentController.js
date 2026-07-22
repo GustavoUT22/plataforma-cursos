@@ -50,7 +50,6 @@ const getMyCourses = async (req, res) => {
   }
 };
 
-// El estudiante autenticado consulta SUS propias inscripciones (usa el id del token)
 const getMyEnrollments = async (req, res) => {
   try {
     const studentId = req.user.id;
@@ -72,4 +71,58 @@ const getMyEnrollments = async (req, res) => {
   }
 };
 
-module.exports = { enrollmentCourse, getMyCourses, getMyEnrollments };
+const getAllEnrollments = async (req, res) => {
+  try {
+    const enrollments = await Enrollment.find()
+      .populate({
+        path: 'studentId',
+        select: 'name email',
+      })
+      .populate({
+        path: 'courseId',
+        select: 'name description category',
+        populate: { path: 'teacher', select: 'name email' }
+      })
+      .sort({ enrolledAt: -1 });
+
+    res.status(200).json({
+      status: 'success',
+      results: enrollments.length,
+      data: enrollments
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteEnrollment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const enrollment = await Enrollment.findByIdAndDelete(id);
+    if (!enrollment) {
+      return res.status(404).json({ message: 'Inscripción no encontrada' });
+    }
+    res.json({ message: 'Inscripción eliminada correctamente' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteMyEnrollment = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+    const { id } = req.params;
+
+    const enrollment = await Enrollment.findOne({ _id: id, studentId });
+    if (!enrollment) {
+      return res.status(404).json({ message: 'Inscripción no encontrada o no te pertenece' });
+    }
+
+    await Enrollment.findByIdAndDelete(id);
+    res.json({ message: 'Te has dado de baja del curso exitosamente' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { enrollmentCourse, getMyCourses, getMyEnrollments, getAllEnrollments, deleteEnrollment, deleteMyEnrollment };

@@ -1,0 +1,127 @@
+<main class="main-content">
+  <nav class="breadcrumb" aria-label="Ruta de navegación">
+    <a routerLink="/admin/dashboard">Dashboard</a>
+    <span class="separator" aria-hidden="true">›</span>
+    <span class="current">Inscripciones</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <h1 class="page-title">Inscripciones</h1>
+        <p class="page-subtitle">Gestiona y revisa todas las inscripciones de estudiantes a los cursos.</p>
+      </div>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-error" role="alert" style="margin-bottom: var(--space-5)">
+      <span class="alert-icon" aria-hidden="true">❌</span>
+      <div class="alert-content">
+        <div class="alert-title">Error</div>
+        <div>{{ errorMessage() }}</div>
+      </div>
+    </div>
+  } @else if (loading()) {
+    <p style="padding: var(--space-10); text-align: center; color: var(--text-muted);">
+      Cargando inscripciones...
+    </p>
+  } @else {
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Filtrar inscripciones">
+      <button
+        class="tab-item"
+        [class.active]="activeTab() === 'all'"
+        role="tab"
+        [attr.aria-selected]="activeTab() === 'all'"
+        (click)="setTab('all')"
+      >Todas ({{ countAll() }})</button>
+    </div>
+
+    @if (enrollments().length === 0) {
+      <div class="card" style="text-align: center; padding: var(--space-10); margin-top: var(--space-6);">
+        <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: var(--space-4);">
+          No hay inscripciones registradas aún.
+        </p>
+        <p style="color: var(--text-muted);">
+          Los estudiantes deben inscribirse a los cursos para que aparezcan aquí.
+        </p>
+      </div>
+    } @else {
+      <!-- Tabla de inscripciones -->
+      <div class="table-wrapper">
+        <table class="table" aria-label="Tabla de inscripciones">
+          <thead>
+            <tr>
+              <th scope="col">Estudiante</th>
+              <th scope="col">Curso</th>
+              <th scope="col">Docente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (enrollment of enrollments(); track enrollment._id) {
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div
+                      class="avatar"
+                      [style.background]="getGradient(enrollment.studentId?.name)"
+                      aria-hidden="true"
+                    >{{ getInitials(enrollment.studentId?.name) }}</div>
+                    <div class="user-info">
+                      <div class="name">{{ enrollment.studentId?.name || '—' }}</div>
+                      <div class="sub">{{ enrollment.studentId?.email || '' }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="user-cell">
+                    <div
+                      style="width:42px;height:42px;background:{{ getGradient(enrollment.courseId?.name) }};border-radius:var(--border-radius);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;"
+                      aria-hidden="true"
+                    >📚</div>
+                    <div class="user-info">
+                      <div class="name">{{ enrollment.courseId?.name || '—' }}</div>
+                      <div class="sub">{{ enrollment.courseId?.category || '' }} · {{ enrollment.courseId?.duration || 0 }}h</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ enrollment.courseId?.teacher?.name || '—' }}</td>
+                <td>{{ (enrollment.enrolledAt || enrollment.createdAt) | date: 'dd MMM yyyy' }}</td>
+                <td>
+                  <div class="td-actions">
+                    <button
+                      class="btn btn-ghost btn-icon btn-sm"
+                      title="Eliminar inscripción"
+                      aria-label="Eliminar inscripción"
+                      style="color: var(--danger-600)"
+                      (click)="deleteEnrollment(enrollment._id)"
+                    >🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Resumen estadístico -->
+      <div class="grid grid-3" style="margin-top:var(--space-8);">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--primary-600);">{{ enrollments().length }}</div>
+          <div style="font-size:var(--text-sm);color:var(--text-muted);">Inscripciones totales</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--success-600);">{{ countStudents() }}</div>
+          <div style="font-size:var(--text-sm);color:var(--text-muted);">Estudiantes inscritos</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:2.5rem;font-weight:900;color:var(--accent-600);">{{ countCourses() }}</div>
+          <div style="font-size:var(--text-sm);color:var(--text-muted);">Cursos con inscripciones</div>
+        </div>
+      </div>
+    }
+  }
+</main>

@@ -35,7 +35,6 @@ export class CourseForm implements OnInit {
       description: new FormControl('', [Validators.maxLength(500)]),
     });
 
-    // Check if editing existing course
     this.courseId = this.route.snapshot.paramMap.get('id');
     if (this.courseId) {
       this.isEditMode = true;

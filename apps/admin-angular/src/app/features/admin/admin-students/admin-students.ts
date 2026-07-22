@@ -31,7 +31,6 @@ export class AdminStudents implements OnInit {
     this.userService.getUsers().subscribe({
       next: (data) => {
         const students = data.filter((user) => user.role === 'student');
-        //console.log('List Users', data);
         this.users.set(students);
         console.log(data);
       },

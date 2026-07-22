@@ -25,6 +25,13 @@ export class Header {
     this.mobileMenuOpen.update((v) => !v);
   }
 
+  scrollTo(elementId: string): void {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
