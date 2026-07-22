@@ -109,12 +109,18 @@ Variables de entorno (ver `backend/.env.example`):
 ```bash
 cd apps/admin-angular
 pnpm install
+cp .env.example .env      # y ajusta NG_APP_API_URL si hace falta
 pnpm start                 # http://localhost:4200
 ```
 
-La URL de la API se define en `src/environments/`. `environment.ts` apunta a
-`http://localhost:3000/api` (desarrollo) y `environment.prod.ts` a la API de Render;
-el build de producción (`pnpm build`) sustituye el archivo automáticamente.
+La URL de la API se lee de un `.env` mediante `@ngx-env/builder`. Las variables
+deben llevar el prefijo `NG_APP_` para exponerse al cliente.
+
+| Variable | Descripción |
+|----------|-------------|
+| `NG_APP_API_URL` | URL base de la API (por defecto `http://localhost:3000/api`) |
+
+En producción (Vercel) define `NG_APP_API_URL` con la URL de Render.
 
 ### Portal React (estudiante)
 
