@@ -7,6 +7,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require("./routes/courseRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.use(express.json( {limit: '10kb'}));
 app.use('/api', authRoutes);
 app.use('/api', courseRoutes);
 app.use('/api', enrollmentRoutes);
-
+app.use('/api', dashboardRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'API corriendo correctamente' });

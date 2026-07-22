@@ -5,9 +5,11 @@ import { Register } from './features/auth/register/register';
 import { CourseList } from './features/courses/course-list/course-list';
 import { CourseDetail } from './features/courses/course-detail/course-detail';
 import { CourseForm } from './features/courses/course-form/course-form';
+import { MyCourses } from './features/courses/my-courses/my-courses';
 import { AdminDashboard } from './features/admin/admin-dashboard/admin-dashboard';
 import { AdminLayout } from './features/admin/admin-layout/admin-layout';
 import { AdminCourses } from './features/admin/admin-courses/admin-courses';
+import { AdminEnrollments } from './features/admin/admin-enrollments/admin-enrollments';
 import { AdminStudents } from './features/admin/admin-students/admin-students';
 import { AdminTeachers } from './features/admin/admin-teachers/admin-teachers';
 import { authGuard } from './core/guards/auth.guard';
@@ -43,6 +45,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'my-courses',
+    component: MyCourses,
+    canActivate: [authGuard],
+  },
+  {
     path: 'admin',
     component: AdminLayout,
     canActivate: [authGuard, roleGuard],
@@ -50,6 +57,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboard },
       { path: 'courses', component: AdminCourses },
+      { path: 'enrollments', component: AdminEnrollments },
       { path: 'students', component: AdminStudents },
       { path: 'teachers', component: AdminTeachers },
     ],

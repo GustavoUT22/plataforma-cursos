@@ -12,7 +12,7 @@
         >
       </li>
       <li><a routerLink="/courses" routerLinkActive="active">Cursos</a></li>
-      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a (click)="scrollTo('beneficios')" style="cursor:pointer">Beneficios</a></li>
     </ul>
 
     <div class="navbar-actions">
@@ -20,6 +20,9 @@
         <a routerLink="/login" class="btn btn-ghost btn-sm">Iniciar sesión</a>
         <a routerLink="/register" class="btn btn-primary btn-sm">Registrarse</a>
       } @else {
+        @if (!isAdmin) {
+          <a routerLink="/my-courses" class="btn btn-ghost btn-sm">Mis cursos</a>
+        }
         @if (isAdmin) {
           <a routerLink="/admin" class="btn btn-ghost btn-sm">Panel Admin</a>
         }
@@ -45,6 +48,9 @@
       <a routerLink="/login" (click)="toggleMobileMenu()">🔑 Iniciar sesión</a>
       <a routerLink="/register" (click)="toggleMobileMenu()">✨ Registrarse</a>
     } @else {
+      @if (!isAdmin) {
+        <a routerLink="/my-courses" (click)="toggleMobileMenu()">📚 Mis cursos</a>
+      }
       @if (isAdmin) {
         <a routerLink="/admin" (click)="toggleMobileMenu()">⚙️ Panel Admin</a>
       }
