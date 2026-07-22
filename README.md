@@ -165,6 +165,7 @@ Base: `/api`
 | PUT | `/courses/:id` | Admin | Actualizar curso |
 | DELETE | `/courses/:id` | Admin | Eliminar curso |
 | POST | `/enrollments` | Estudiante | Inscribirse a un curso |
+| POST | `/enrollments/admin` | Admin | Inscribir a un estudiante en un curso (`studentId`, `courseId`) |
 | GET | `/enrollments/me` | Estudiante | Ver mis inscripciones |
 | GET | `/enrollments/student/:studentId` | Admin / Docente | Ver inscripciones de un estudiante |
 
