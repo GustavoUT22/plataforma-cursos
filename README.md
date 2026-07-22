@@ -20,7 +20,7 @@ plataforma-cursos/
 ├── backend/              API REST — Node.js + Express + MongoDB (Mongoose) + JWT
 ├── apps/
 │   ├── admin-angular/    Panel administrativo — Angular
-│   ├── portal-react/     Portal del estudiante — React (Context API)   [en progreso]
+│   ├── portal-react/     Portal del estudiante — React (consume la API)
 │   └── landing-next/     Vista pública — Next.js (SSR/SSG)             [en progreso]
 ├── design/               Prototipo HTML/CSS de referencia
 └── docs/                 Documentación técnica
@@ -110,6 +110,36 @@ Variables de entorno (ver `backend/.env.example`):
 cd apps/admin-angular
 pnpm install
 pnpm start                 # http://localhost:4200
+```
+
+La URL de la API se define en `src/environments/`. `environment.ts` apunta a
+`http://localhost:3000/api` (desarrollo) y `environment.prod.ts` a la API de Render;
+el build de producción (`pnpm build`) sustituye el archivo automáticamente.
+
+### Portal React (estudiante)
+
+```bash
+cd apps/portal-react
+pnpm install
+cp .env.example .env      # y ajusta VITE_API_URL si hace falta
+pnpm dev                   # http://localhost:5173
+```
+
+| Variable | Descripción |
+|----------|-------------|
+| `VITE_API_URL` | URL base de la API (por defecto `http://localhost:3000/api`) |
+
+El catálogo de cursos y las inscripciones del estudiante se cargan desde la API.
+Para ver las inscripciones propias debe existir un token de estudiante en
+`localStorage` (clave `token`).
+
+### Landing Next.js
+
+```bash
+cd apps/landing-next
+pnpm install
+cp .env.local.example .env.local   # y ajusta API_URL si hace falta
+pnpm dev                            # http://localhost:3000
 ```
 
 ---
