@@ -58,10 +58,10 @@ _Enlace de YouTube: pendiente de completar._
 
 | Integrante | Aporte principal |
 |------------|------------------|
-| _Nombre 1_ | Backend + despliegue (Render/Atlas) |
-| _Nombre 2_ | Panel Angular |
+| Gustavo | Backend + despliegue (Render/Atlas) |
+| Aldair | Panel Angular |
 | Diego Alonso Josue García Díaz | Portal React |
-| _Nombre 4_ | Landing Next.js + documentación |
+| Anthony | Landing Next.js + documentación |
 
 ---
 
