@@ -15,6 +15,6 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get<UserModel[]>('http://localhost:3001/api/users', { headers });
+    return this.http.get<UserModel[]>('http://localhost:3000/api/users', { headers });
   }
 }

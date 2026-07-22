@@ -85,7 +85,7 @@
         <p class="section-subtitle">Seleccionados por nuestros docentes y calificados por estudiantes activos.</p>
       </div>
       <div class="grid grid-3">
-        @for (course of courses(); track course.id) {
+      @for (course of courses(); track course._id) {
           <article class="course-card">
             <div class="course-card-image" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
               <div class="course-thumb-placeholder">📚</div>
@@ -103,7 +103,7 @@
             </div>
             <div class="course-card-footer">
               <div class="course-price"><span class="currency">S/</span> {{ course.price }}</div>
-              <a [routerLink]="['/courses', course.id]" class="btn btn-primary btn-sm">Ver curso</a>
+              <a [routerLink]="['/courses', course._id]" class="btn btn-primary btn-sm">Ver curso</a>
             </div>
           </article>
         } @empty {

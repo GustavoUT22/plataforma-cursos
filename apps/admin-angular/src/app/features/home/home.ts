@@ -10,11 +10,19 @@ import { Course } from '../../shared/models/course.model';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
-  courses = signal<Course[]>([]);
+  courses = signal<any[]>([]);
   private courseService = inject(CourseService);
 
   ngOnInit(): void {
-    const allCourses = this.courseService.getCourses();
-    this.courses.set(allCourses.slice(0, 6));
+    this.courseService.getCourses().subscribe({
+      next: (res: any) => {
+        console.log('Home - Respuesta completa:', res);
+        const allCourses = res.data || [];
+        this.courses.set(allCourses.slice(0, 6));
+      },
+      error: (err) => {
+        console.error('Home - Error al cargar cursos:', err);
+      },
+    });
   }
 }

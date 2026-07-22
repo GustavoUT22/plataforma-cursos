@@ -1,22 +1,29 @@
-<section class="course-detail">
-  <h1 class="title">Detalle de curso</h1>
+@if (course(); as c) {
+  <section class="course-detail">
+    <h1 class="title">Detalle de curso</h1>
 
-  <div class="card">
-    <h2>{{ course.name }}</h2>
-    <p class="description">{{ course.description }}</p>
+    <div class="card">
+      <h2>{{ c.name }}</h2>
+      <p class="description">{{ c.description }}</p>
 
-    <p><strong>Categoría:</strong> {{ course.category }}</p>
-    <p><strong>Docente:</strong> {{ course.teacher }}</p>
-    <p><strong>Modalidad:</strong> {{ course.modality }}</p>
-    <p><strong>Duración:</strong> {{ course.duration }} horas</p>
-    <p><strong>Vacantes:</strong> {{ course.vacancies }}</p>
-    <p><strong>Costo:</strong> {{ course.price }}</p>
-    <p><strong>Inicio:</strong> {{ course.startDate | date: 'dd/MM/yyyy' }}</p>
-    <p>
-      <strong>Estado:</strong>
-      <span class="status" [class.active]="course.isActive">
-        {{ course.isActive ? 'Activo' : 'Inactivo' }}
-      </span>
-    </p>
-  </div>
-</section>
+      <p><strong>Categoría:</strong> {{ c.category }}</p>
+      <p><strong>Docente:</strong> {{ c.teacher }}</p>
+      <p><strong>Modalidad:</strong> {{ c.modality }}</p>
+      <p><strong>Duración:</strong> {{ c.duration }} horas</p>
+      <p><strong>Vacantes:</strong> {{ c.vacancies }}</p>
+      <p><strong>Costo:</strong> {{ c.price }}</p>
+      <p><strong>Inicio:</strong> {{ c.startDate | date: 'dd/MM/yyyy' }}</p>
+      <p>
+        <strong>Estado:</strong>
+        <span class="status" [class.active]="c.isActive">
+          {{ c.isActive ? 'Activo' : 'Inactivo' }}
+        </span>
+      </p>
+    </div>
+  </section>
+} @else {
+  <section class="course-detail">
+    <h1 class="title">Detalle de curso</h1>
+    <p>Cargando curso...</p>
+  </section>
+}

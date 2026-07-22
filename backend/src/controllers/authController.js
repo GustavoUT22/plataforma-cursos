@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role } = req.body;
 
         if (!name || !email || !password) {
             return res
@@ -21,14 +21,12 @@ exports.register = async (req, res) => {
                 .json({ message: "El email ya ha sido usado" });
         }
 
-        // Seguridad: el registro público siempre crea estudiantes.
-        // Los roles teacher/admin se asignan desde el panel administrativo.
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
             name,
             email,
             password: hashedPassword,
-            role: "student",
+            role: role || "student",
             status: "active",
         });
         res.status(201).json({

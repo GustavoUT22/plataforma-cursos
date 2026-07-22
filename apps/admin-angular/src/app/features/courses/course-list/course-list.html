@@ -1,7 +1,7 @@
 <section class="course-list">
 <h1 class="title">Lista de cursos</h1>
 <div class="courses-wrapper">
-  @for (item of courses; track $index) {
+  @for (item of courses(); track $index) {
     <div class="card">
       <div class="card-inner">
         <div class="card-front">
@@ -18,7 +18,7 @@
             <li><strong>Precio:</strong> {{ item.price }}</li>
             <li><strong>Inicio:</strong> <i> {{ item.startDate | date: 'dd/MM/yyyy' }}</i></li>
           </ul>
-          <a [routerLink]="['/courses', item.id]">Ver Detalle</a>
+          <a [routerLink]="['/courses', item._id]">Ver Detalle</a>
         </div>
       </div>
     </div>

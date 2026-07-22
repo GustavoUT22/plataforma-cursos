@@ -61,7 +61,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (course of courses; track $index) {
+        @for (course of courses(); track $index) {
           <tr>
             <td>
               <div class="user-cell">
@@ -101,25 +101,20 @@
             <td><span class="badge badge-success">Activo</span></td>
             <td>
               <div class="td-actions">
-                <button
+                <a
+                  [routerLink]="['/courses', course._id]"
                   class="btn btn-ghost btn-icon btn-sm"
-                  title="Editar"
-                  aria-label="Editar curso"
+                  title="Ver detalle"
+                  aria-label="Ver detalle del curso"
                 >
-                  ✏️
-                </button>
-                <button
-                  class="btn btn-ghost btn-icon btn-sm"
-                  title="Desactivar"
-                  aria-label="Desactivar curso"
-                >
-                  🔕
-                </button>
+                  👁️
+                </a>
                 <button
                   class="btn btn-ghost btn-icon btn-sm"
                   title="Eliminar"
                   aria-label="Eliminar curso"
                   style="color: var(--danger-600)"
+                  (click)="deleteCourse(course._id)"
                 >
                   🗑️
                 </button>

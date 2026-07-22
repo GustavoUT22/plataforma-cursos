@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CourseService } from '../../../core/services/course.service';
-import { Course } from '../../../shared/models/course.model';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
 
@@ -11,10 +10,26 @@ import { RouterLink } from "@angular/router";
   styleUrl: './course-list.css',
 })
 export class CourseList implements OnInit {
-  courses: Course[] = [];
+  courses = signal<any[]>([]);
   private courseService = inject(CourseService);
 
   ngOnInit(): void {
-      this.courses = this.courseService.getCourses();
+    this.loadCourses();
+  }
+
+  loadCourses() {
+    this.courseService.getCourses().subscribe({
+      next: (res: any) => {
+        console.log('CourseList - Respuesta:', res);
+        const mapped = (res.data || []).map((course: any) => ({
+          ...course,
+          teacher: course.teacher?.name || course.teacher
+        }));
+        this.courses.set(mapped);
+      },
+      error: (err) => {
+        console.error('CourseList - Error:', err);
+      },
+    });
   }
 }
