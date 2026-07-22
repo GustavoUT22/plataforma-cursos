@@ -40,8 +40,8 @@ bcrypt · Helmet · CORS.
 | App | URL |
 |-----|-----|
 | API (Render) | https://plataforma-cursos-4ipc.onrender.com |
-| Panel Angular (Vercel) | _pendiente de completar_ |
-| Portal React (Vercel) | _pendiente de completar_ |
+| Panel Angular (Vercel) | https://plataforma-cursos-qtmu.vercel.app/login |
+| Portal React (Vercel) | https://plataforma-cursos-dy3q.vercel.app/ |
 | Landing Next.js (Vercel) | _pendiente de completar_ |
 
 Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/api`
@@ -60,7 +60,7 @@ _Enlace de YouTube: pendiente de completar._
 |------------|------------------|
 | _Nombre 1_ | Backend + despliegue (Render/Atlas) |
 | _Nombre 2_ | Panel Angular |
-| _Nombre 3_ | Portal React |
+| Diego Alonso Josue García Díaz | Portal React |
 | _Nombre 4_ | Landing Next.js + documentación |
 
 ---
