@@ -1,3 +1,52 @@
 .table thead tr th {
   text-align: center;
 }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 440px;
+  width: 100%;
+}
+
+.modal-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  color: #2c3345;
+}
+
+.modal-box .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.msg {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+.msg.error {
+  color: var(--danger-600, #dc2626);
+}
+.msg.success {
+  color: var(--success-600, #16a34a);
+}

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { enrollmentCourse, getMyCourses, getMyEnrollments } = require('../controllers/enrollmentController');
+const { enrollmentCourse, getMyCourses, getMyEnrollments, adminEnrollment } = require('../controllers/enrollmentController');
 const verifyToken = require("../middlewares/auth.middleware");
 const verifyRole = require("../middlewares/role.middleware");
 
 router.post('/enrollments', verifyToken, verifyRole('student'), enrollmentCourse);
+router.post('/enrollments/admin', verifyToken, verifyRole('admin'), adminEnrollment);
 router.get('/enrollments/me', verifyToken, verifyRole('student'), getMyEnrollments);
 router.get('/enrollments/student/:studentId', verifyToken, verifyRole('admin', 'teacher'), getMyCourses);
 

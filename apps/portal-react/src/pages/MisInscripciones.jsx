@@ -1,30 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import Sidebar from "../components/layout/Sidebar";
 import Breadcrumb from "../components/common/Breadcrumb";
-import Tabs from "../components/common/Tabs";
 import PageHeader from "../components/dashboard/PageHeader";
 import EnrollmentTableRow from "../components/inscripciones/EnrollmentTableRow";
-import StatSummaryCard from "../components/inscripciones/StatSummaryCard";
+import { getMyEnrollments, getToken } from "../lib/api";
 
-const allEnrollments = [
-  { iconBg: "linear-gradient(135deg,#1a1a2e,#7c3aed)", icon: "⚡", title: "Desarrollo Frontend con React", category: "Full Stack", hours: 60, teacher: "María Torres", date: "15 feb 2024", modality: "Virtual", modalityBadgeClass: "badge-primary", progress: 72, progressColorClass: "", status: "active", statusLabel: "En progreso", statusBadgeClass: "badge-primary", actionLabel: "Continuar", actionTo: "/detalle-curso" },
-  { iconBg: "linear-gradient(135deg,#064e3b,#059669)", icon: "🚀", title: "Backend con Node.js", category: "Backend", hours: 55, teacher: "Luis Ramírez", date: "01 mar 2024", modality: "Virtual", modalityBadgeClass: "badge-primary", progress: 38, progressColorClass: "warning", status: "active", statusLabel: "En progreso", statusBadgeClass: "badge-warning", actionLabel: "Continuar", actionTo: "/detalle-curso" },
-  { iconBg: "linear-gradient(135deg,#1e3a5f,#2563eb)", icon: "⚛️", title: "Programación Web II", category: "Frontend", hours: 40, teacher: "Juan Pérez", date: "10 ene 2024", modality: "Híbrida", modalityBadgeClass: "badge-accent", progress: 100, progressColorClass: "success", status: "completed", statusLabel: "Completado", statusBadgeClass: "badge-success" },
-];
+const CATEGORY_STYLES = {
+  Frontend: { iconBg: "linear-gradient(135deg,#1a1a2e,#7c3aed)", icon: "⚡" },
+  Backend: { iconBg: "linear-gradient(135deg,#064e3b,#059669)", icon: "🚀" },
+  Seguridad: { iconBg: "linear-gradient(135deg,#431407,#ea580c)", icon: "🔐" },
+  "Bases de Datos": { iconBg: "linear-gradient(135deg,#1e1b4b,#4338ca)", icon: "🗃️" },
+};
+const DEFAULT_STYLE = { iconBg: "linear-gradient(135deg,#1e3a5f,#2563eb)", icon: "📚" };
 
-const tabs = [
-  { key: "all", label: `Todos (${allEnrollments.length})` },
-  { key: "active", label: `En progreso (${allEnrollments.filter(e => e.status === "active").length})` },
-  { key: "completed", label: `Completados (${allEnrollments.filter(e => e.status === "completed").length})` },
-];
+function formatDate(value) {
+  if (!value) return "—";
+  return new Date(value).toLocaleDateString("es-PE", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function toRow(enrollment) {
+  const course = enrollment.courseId || {};
+  const style = CATEGORY_STYLES[course.category] || DEFAULT_STYLE;
+  return {
+    iconBg: style.iconBg,
+    icon: style.icon,
+    title: course.name || "Curso",
+    category: course.category || "General",
+    hours: course.duration ?? "—",
+    teacher: course.teacher?.name || "Docente por asignar",
+    date: formatDate(enrollment.enrolledAt),
+    modality: "Virtual",
+    modalityBadgeClass: "badge-primary",
+    progress: 0,
+    progressColorClass: "",
+    status: "active",
+    statusLabel: "Inscrito",
+    statusBadgeClass: "badge-primary",
+    actionLabel: "Ver curso",
+    actionTo: "/cursos",
+  };
+}
 
 export default function MisInscripciones() {
-  const [activeTab, setActiveTab] = useState("all");
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const filtered = activeTab === "all"
-    ? allEnrollments
-    : allEnrollments.filter((e) => e.status === activeTab);
+  useEffect(() => {
+    if (!getToken()) {
+      setError("Inicia sesión para ver tus inscripciones.");
+      setLoading(false);
+      return;
+    }
+    getMyEnrollments()
+      .then((data) => setRows(data.map(toRow)))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <Layout>
@@ -41,34 +74,46 @@ export default function MisInscripciones() {
             actionTo="/cursos"
           />
 
-          <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+          {loading && (
+            <p style={{ textAlign: "center", color: "var(--text-muted)", marginTop: "var(--space-8)" }}>
+              Cargando inscripciones...
+            </p>
+          )}
 
-          <div className="table-wrapper">
-            <table className="table" aria-label="Tabla de inscripciones">
-              <thead>
-                <tr>
-                  <th scope="col">Curso</th>
-                  <th scope="col">Docente</th>
-                  <th scope="col">Fecha de inscripción</th>
-                  <th scope="col">Modalidad</th>
-                  <th scope="col">Progreso</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((e) => (
-                  <EnrollmentTableRow key={e.title} {...e} />
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {error && (
+            <p style={{ textAlign: "center", color: "var(--text-muted)", marginTop: "var(--space-8)" }}>
+              {error}
+            </p>
+          )}
 
-          <div className="grid grid-3" style={{ marginTop: "var(--space-8)" }}>
-            <StatSummaryCard value="S/ 450" valueColor="var(--primary-600)" label="Total invertido" />
-            <StatSummaryCard value="87h" valueColor="var(--success-600)" label="Horas completadas" />
-            <StatSummaryCard value="70%" valueColor="var(--accent-600)" label="Promedio de avance" />
-          </div>
+          {!loading && !error && (
+            <div className="table-wrapper">
+              <table className="table" aria-label="Tabla de inscripciones">
+                <thead>
+                  <tr>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Docente</th>
+                    <th scope="col">Fecha de inscripción</th>
+                    <th scope="col">Modalidad</th>
+                    <th scope="col">Progreso</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((e, i) => (
+                    <EnrollmentTableRow key={i} {...e} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {!loading && !error && rows.length === 0 && (
+            <p style={{ textAlign: "center", color: "var(--text-muted)", marginTop: "var(--space-8)" }}>
+              Aún no tienes inscripciones. Explora el catálogo para inscribirte.
+            </p>
+          )}
         </main>
       </div>
     </Layout>

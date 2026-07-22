@@ -13,6 +13,10 @@ export class AdminCourses implements OnInit {
   courses = signal<any[]>([]);
   private courseService = inject(CourseService);
 
+  // Estado del modal de creación / edición
+  formOpen = signal(false);
+  editingCourseId = signal<string | null>(null);
+
   ngOnInit(): void {
     this.loadCourses();
   }
@@ -20,10 +24,9 @@ export class AdminCourses implements OnInit {
   loadCourses() {
     this.courseService.getCourses().subscribe({
       next: (res: any) => {
-        console.log('AdminCourses - Respuesta:', res);
         const mapped = (res.data || []).map((course: any) => ({
           ...course,
-          teacher: course.teacher?.name || course.teacher
+          teacher: course.teacher?.name || course.teacher,
         }));
         this.courses.set(mapped);
       },
@@ -33,9 +36,24 @@ export class AdminCourses implements OnInit {
     });
   }
 
-  showForm = false;
-  toggleform() {
-    this.showForm = !this.showForm;
+  openCreate() {
+    this.editingCourseId.set(null);
+    this.formOpen.set(true);
+  }
+
+  openEdit(id: string) {
+    this.editingCourseId.set(id);
+    this.formOpen.set(true);
+  }
+
+  closeForm() {
+    this.formOpen.set(false);
+    this.editingCourseId.set(null);
+  }
+
+  onSaved() {
+    this.closeForm();
+    this.loadCourses();
   }
 
   deleteCourse(id: string) {

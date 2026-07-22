@@ -8,7 +8,7 @@ import { Course } from "../../shared/models/course.model";
 })
 export class CourseService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = import.meta.env.NG_APP_API_URL;
 
   getCourses(): Observable<any> {
     return this.http.get(`${this.apiUrl}/courses`);

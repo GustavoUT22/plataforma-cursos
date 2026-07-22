@@ -11,11 +11,21 @@
         <h1 class="page-title">Gestión de cursos</h1>
         <p class="page-subtitle">Administra el catálogo completo de cursos de la plataforma.</p>
       </div>
-      <button class="btn btn-primary" (click)="toggleform()">+ Nuevo curso</button>
+      <button class="btn btn-primary" (click)="openCreate()">+ Nuevo curso</button>
     </div>
   </div>
-  @if (showForm) {
-    <app-course-form></app-course-form>
+
+  @if (formOpen()) {
+    <div class="modal-overlay" (click)="closeForm()">
+      <div class="modal-box" (click)="$event.stopPropagation()">
+        <app-course-form
+          [embedded]="true"
+          [courseId]="editingCourseId()"
+          (saved)="onSaved()"
+          (cancelled)="closeForm()"
+        ></app-course-form>
+      </div>
+    </div>
   }
 
   <!-- Filtros / Búsqueda -->
@@ -109,6 +119,14 @@
                 >
                   👁️
                 </a>
+                <button
+                  class="btn btn-ghost btn-icon btn-sm"
+                  title="Editar"
+                  aria-label="Editar curso"
+                  (click)="openEdit(course._id)"
+                >
+                  ✏️
+                </button>
                 <button
                   class="btn btn-ghost btn-icon btn-sm"
                   title="Eliminar"

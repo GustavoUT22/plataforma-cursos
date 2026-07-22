@@ -134,6 +134,14 @@
                   ✏️
                 </button>
                 <button
+                  class="btn btn-ghost btn-sm"
+                  title="Inscribir en un curso"
+                  aria-label="Inscribir en un curso"
+                  (click)="openEnroll(user)"
+                >
+                  ➕ Inscribir
+                </button>
+                <button
                   class="btn btn-ghost btn-icon btn-sm"
                   title="Suspender"
                   aria-label="Suspender"
@@ -157,4 +165,45 @@
     <button class="page-btn">24</button>
     <button class="page-btn">›</button>
   </nav>
+
+  @if (enrollOpen()) {
+    <div class="modal-overlay" (click)="closeEnroll()">
+      <div class="modal-box" (click)="$event.stopPropagation()">
+        <h2 class="modal-title">Inscribir a {{ selectedStudent()?.name }}</h2>
+
+        <div class="campo">
+          <label for="courseSelect">Curso</label>
+          <select
+            id="courseSelect"
+            class="form-control"
+            [value]="selectedCourseId()"
+            (change)="onCourseChange($event)"
+          >
+            <option value="" disabled>Seleccione un curso</option>
+            @for (course of courses(); track course._id) {
+              <option [value]="course._id">{{ course.name }}</option>
+            }
+          </select>
+        </div>
+
+        @if (enrollError()) {
+          <p class="msg error" role="alert">{{ enrollError() }}</p>
+        }
+        @if (enrollSuccess()) {
+          <p class="msg success" role="status">{{ enrollSuccess() }}</p>
+        }
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost" (click)="closeEnroll()">Cerrar</button>
+          <button
+            class="btn btn-primary"
+            [disabled]="!selectedCourseId() || enrollSubmitting()"
+            (click)="submitEnroll()"
+          >
+            {{ enrollSubmitting() ? 'Inscribiendo...' : 'Inscribir' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </main>

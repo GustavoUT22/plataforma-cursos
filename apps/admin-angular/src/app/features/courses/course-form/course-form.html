@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h2>Formulario de creación de un curso</h2>
+  <h2>{{ isEditMode ? 'Editar curso' : 'Nuevo curso' }}</h2>
 
   <div class="campo">
     <label>Nombre</label>
@@ -33,14 +33,16 @@
 
   <div class="campo">
     <label>Docente</label>
-    <input formControlName="teacher" placeholder="Juan Pérez" />
+    <select class="modalidad" formControlName="teacher">
+      <option value="" disabled>Seleccione un docente</option>
+      @for (t of teachers; track t._id) {
+        <option [value]="t._id">{{ t.name }}</option>
+      }
+    </select>
     @if (form.get('teacher')?.touched && form.get('teacher')?.invalid) {
       <small class="error">
         @if (form.get('teacher')?.errors?.['required']) {
           El docente es obligatorio
-        }
-        @if (form.get('teacher')?.errors?.['minlength']) {
-          Mínimo 2 caracteres
         }
       </small>
     }
@@ -136,5 +138,14 @@
     }
   </div>
 
-  <button type="submit" [disabled]="form.invalid">Guardar</button>
+  @if (errorMsg) {
+    <p class="error" role="alert">{{ errorMsg }}</p>
+  }
+
+  <div class="form-actions">
+    <button type="button" class="btn btn-ghost" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid || submitting">
+      {{ submitting ? 'Guardando...' : 'Guardar' }}
+    </button>
+  </div>
 </form>
