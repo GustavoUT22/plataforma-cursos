@@ -52,7 +52,7 @@ Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/
 
 ## Video de sustentación
 
-_Enlace de YouTube: pendiente de completar._
+_Enlace de YouTube: https://youtu.be/zMw1Z0SIY-g_
 
 ## Integrantes
 
