@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CourseService } from '../../../core/services/course.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-form',
@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 export class CourseForm implements OnInit {
   private courseService = inject(CourseService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   form!: FormGroup;
+  isEditMode = false;
+  courseId: string | null = null;
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -31,21 +34,44 @@ export class CourseForm implements OnInit {
       isActive: new FormControl(true, [Validators.required]),
       description: new FormControl('', [Validators.maxLength(500)]),
     });
+
+    // Check if editing existing course
+    this.courseId = this.route.snapshot.paramMap.get('id');
+    if (this.courseId) {
+      this.isEditMode = true;
+      this.courseService.getCourse(this.courseId).subscribe({
+        next: (course) => {
+          this.form.patchValue({
+            ...course,
+            startDate: course.startDate instanceof Date 
+              ? course.startDate.toISOString().split('T')[0]
+              : course.startDate,
+          });
+        },
+      });
+    }
   }
 
   onSubmit() {
-    const courses = this.courseService.getCourses();
-    const newId = courses.length > 0 ? Math.max(...courses.map((c) => c.id)) + 1 : 1;
+    if (this.form.invalid) return;
 
-    const newCourse = {
-      id: newId,
+    const courseData = {
       ...this.form.value,
       startDate: new Date(this.form.value.startDate),
     };
 
-    console.log(newCourse);
-    this.courseService.createCourse(newCourse);
-
-    this.router.navigate(['/courses']);
+    if (this.isEditMode && this.courseId) {
+      this.courseService.updateCourse(this.courseId, courseData).subscribe({
+        next: () => {
+          this.router.navigate(['/courses']);
+        },
+      });
+    } else {
+      this.courseService.createCourse(courseData).subscribe({
+        next: () => {
+          this.router.navigate(['/courses']);
+        },
+      });
+    }
   }
 }

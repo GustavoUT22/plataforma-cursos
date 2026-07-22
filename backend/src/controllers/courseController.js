@@ -3,7 +3,7 @@ const User = require('../models/User.model');
 
 const createCourse = async (req, res) => {
     try {
-        const { name, description, teacher, category } = req.body;
+        const { name, description, teacher, category, modality, duration, vacancies, price, startDate, isActive } = req.body;
 
         const teacherExists = await User.findById(teacher);
         if (!teacherExists) {
@@ -14,19 +14,25 @@ const createCourse = async (req, res) => {
             return res.status(400).json({ message: 'El usuario asignado debe tener el rol de Docente o Admin' });
         }
 
-        const newCourse  = new Course({
+        const newCourse = await Course.create({
             name,
             description,
             teacher,
-            category
+            category,
+            modality: modality || 'Presencial',
+            duration: duration || 0,
+            vacancies: vacancies || 0,
+            price: price || 0,
+            startDate: startDate || null,
+            isActive: isActive !== undefined ? isActive : true
         });
 
-        await newCourse.save();
+        const populatedCourse = await Course.findById(newCourse._id).populate('teacher', 'name email');
 
         res.status(201).json({
             status: 'success',
             message: 'Curso creado exitosamente',
-            data: newCourse
+            data: populatedCourse
         });
 
     } catch (error) {
@@ -62,12 +68,8 @@ const getCourseById = async (req, res) => {
 
       res.status(200).json({
         status: 'success',
-        results: course.length,
         data: course
-
       });
-
-      
       
     } catch (error) {
       res.status(500).json({
@@ -79,13 +81,25 @@ const getCourseById = async (req, res) => {
 
 const updateCourse = async (req, res) => {
   try {
-    const { name, description, teacher, category } = req.body;
+    const { name, description, teacher, category, modality, duration, vacancies, price, startDate, isActive } = req.body;
+
+    const updateData = {};
+    if (name !== undefined) updateData.name = name;
+    if (description !== undefined) updateData.description = description;
+    if (teacher !== undefined) updateData.teacher = teacher;
+    if (category !== undefined) updateData.category = category;
+    if (modality !== undefined) updateData.modality = modality;
+    if (duration !== undefined) updateData.duration = duration;
+    if (vacancies !== undefined) updateData.vacancies = vacancies;
+    if (price !== undefined) updateData.price = price;
+    if (startDate !== undefined) updateData.startDate = startDate;
+    if (isActive !== undefined) updateData.isActive = isActive;
 
     const course = await Course.findByIdAndUpdate(
       req.params.id,
-      { name, description, teacher, category },
+      updateData,
       { new: true, runValidators: true }
-    );
+    ).populate('teacher', 'name email');
 
     if (!course) {
       return res.status(404).json({ message: 'Curso no encontrado' });

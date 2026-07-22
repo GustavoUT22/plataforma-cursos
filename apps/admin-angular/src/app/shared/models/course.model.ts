@@ -1,8 +1,9 @@
 export interface Course {
-  id: number;
+  _id: string;
+  id?: string;
   name: string;
   category: string;
-  teacher: string;
+  teacher: string | { _id: string; name: string; email: string };
   modality: string;
   duration: number;
   vacancies: number;
@@ -10,4 +11,6 @@ export interface Course {
   startDate: Date;
   isActive: boolean;
   description: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

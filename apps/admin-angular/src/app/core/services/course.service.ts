@@ -1,66 +1,38 @@
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Course } from "../../shared/models/course.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private courses: Course[] = [
-    {
-      id: 1,
-      name: 'Angular',
-      category: 'Desarrollo web',
-      teacher: 'Juan Pérez',
-      modality: 'Presencial',
-      duration: 40,
-      vacancies: 20,
-      price: 200,
-      startDate: new Date('2024-07-01'),
-      isActive: true,
-      description: 'Aprende a desarrollar aplicaciones web con Angular.'
-    },
-    {
-      id: 2,
-      name: 'React',
-      category: 'Desarrollo web',
-      teacher: 'María Gómez',
-      modality: 'Online',
-      duration: 30,
-      vacancies: 15,
-      price: 150,
-      startDate: new Date('2024-08-01'),
-      isActive: true,
-      description: 'Aprende a desarrollar aplicaciones web con React.'
-    },
-    {
-      id: 3,
-      name: 'Python',
-      category: 'Programación',
-      teacher: 'Carlos López',
-      modality: 'Presencial',
-      duration: 50,
-      vacancies: 10,
-      price: 250,
-      startDate: new Date('2024-09-01'),
-      isActive: true,
-      description: 'Aprende a programar con Python.'
-    }
-  ];
-  
-  getCourses(): Course[] {
-    return this.courses
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/api';
+
+  getCourses(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/courses`);
   }
 
-  getCourse(id: number): Course {
-      const foundCourse = this.courses.find(ele => ele.id == id);
-      if (!foundCourse){
-          throw new Error("No encontrado")
-      }
-
-      return foundCourse;
+  getCourse(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/courses/${id}`);
   }
-  
-  createCourse(newCourse: Course): void {
-    this.courses.push(newCourse);
+
+  createCourse(course: Partial<Course>): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.post(`${this.apiUrl}/courses`, course, { headers });
+  }
+
+  updateCourse(id: string, course: Partial<Course>): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.put(`${this.apiUrl}/courses/${id}`, course, { headers });
+  }
+
+  deleteCourse(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.delete(`${this.apiUrl}/courses/${id}`, { headers });
   }
 }

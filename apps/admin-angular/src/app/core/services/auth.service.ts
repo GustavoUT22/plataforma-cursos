@@ -6,7 +6,7 @@ import { inject, Injectable } from '@angular/core';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3001/api';
+  private apiUrl = 'http://localhost:3000/api';
 
   login(email: string, password: string) {
     return this.http.post<{ token: string; message: string }>(`${this.apiUrl}/login`, {
