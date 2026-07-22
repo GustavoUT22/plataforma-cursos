@@ -7,6 +7,29 @@ export function getToken() {
   return localStorage.getItem("token");
 }
 
+export function isAuthenticated() {
+  return !!getToken();
+}
+
+// POST /login (público). Guarda el token si las credenciales son válidas.
+export async function login(email, password) {
+  const res = await fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(body.message || "No se pudo iniciar sesión");
+  }
+  localStorage.setItem("token", body.token);
+  return body;
+}
+
+export function logout() {
+  localStorage.removeItem("token");
+}
+
 async function request(path, { auth = false } = {}) {
   const headers = {};
   if (auth) {
