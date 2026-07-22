@@ -42,7 +42,7 @@ bcrypt · Helmet · CORS.
 | API (Render) | https://plataforma-cursos-4ipc.onrender.com |
 | Panel Angular (Vercel) | https://plataforma-cursos-qtmu.vercel.app/login |
 | Portal React (Vercel) | https://plataforma-cursos-dy3q.vercel.app/ |
-| Landing Next.js (Vercel) | _pendiente de completar_ |
+| Landing Next.js (Vercel) | https://plataforma-cursos-puce.vercel.app/ |
 
 Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/api`
 
