@@ -57,3 +57,16 @@ button {
   font-size: 14px;
   cursor: pointer;
 }
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin: 12px;
+}
+
+.form-actions .btn-ghost {
+  background-color: transparent;
+  color: #2c3345;
+  border: 1px solid gray;
+}

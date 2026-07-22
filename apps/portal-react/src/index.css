@@ -457,6 +457,32 @@ small { font-size: var(--text-sm); }
   flex-shrink: 0;
 }
 
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-5);
+  color: var(--gray-400);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.sidebar-logout:hover {
+  background: rgba(255,255,255,.07);
+  color: var(--white);
+}
+.sidebar-logout .nav-icon {
+  font-size: var(--text-lg);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
 .sidebar-badge {
   margin-left: auto;
   background: var(--primary-600);

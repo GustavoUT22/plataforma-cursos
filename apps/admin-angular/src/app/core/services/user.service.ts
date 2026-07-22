@@ -8,6 +8,7 @@ import { UserModel } from '../../shared/models/user.model';
 })
 export class UserService {
   private http = inject(HttpClient);
+  private apiUrl = import.meta.env.NG_APP_API_URL;
 
   getUsers(): Observable<UserModel[]> {
     const token = localStorage.getItem('token');
@@ -15,6 +16,6 @@ export class UserService {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get<UserModel[]>('http://localhost:3000/api/users', { headers });
+    return this.http.get<UserModel[]>(`${this.apiUrl}/users`, { headers });
   }
 }

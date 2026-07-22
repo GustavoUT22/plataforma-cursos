@@ -20,7 +20,7 @@ plataforma-cursos/
 ├── backend/              API REST — Node.js + Express + MongoDB (Mongoose) + JWT
 ├── apps/
 │   ├── admin-angular/    Panel administrativo — Angular
-│   ├── portal-react/     Portal del estudiante — React (Context API)   [en progreso]
+│   ├── portal-react/     Portal del estudiante — React (consume la API)
 │   └── landing-next/     Vista pública — Next.js (SSR/SSG)             [en progreso]
 ├── design/               Prototipo HTML/CSS de referencia
 └── docs/                 Documentación técnica
@@ -40,9 +40,9 @@ bcrypt · Helmet · CORS.
 | App | URL |
 |-----|-----|
 | API (Render) | https://plataforma-cursos-4ipc.onrender.com |
-| Panel Angular (Vercel) | _pendiente de completar_ |
-| Portal React (Vercel) | _pendiente de completar_ |
-| Landing Next.js (Vercel) | _pendiente de completar_ |
+| Panel Angular (Vercel) | https://plataforma-cursos-qtmu.vercel.app/login |
+| Portal React (Vercel) | https://plataforma-cursos-dy3q.vercel.app/ |
+| Landing Next.js (Vercel) | https://plataforma-cursos-puce.vercel.app/ |
 
 Base de la API para los frontends: `https://plataforma-cursos-4ipc.onrender.com/api`
 
@@ -60,7 +60,7 @@ _Enlace de YouTube: pendiente de completar._
 |------------|------------------|
 | _Nombre 1_ | Backend + despliegue (Render/Atlas) |
 | _Nombre 2_ | Panel Angular |
-| _Nombre 3_ | Portal React |
+| Diego Alonso Josue García Díaz | Portal React |
 | _Nombre 4_ | Landing Next.js + documentación |
 
 ---
@@ -109,7 +109,43 @@ Variables de entorno (ver `backend/.env.example`):
 ```bash
 cd apps/admin-angular
 pnpm install
+cp .env.example .env      # y ajusta NG_APP_API_URL si hace falta
 pnpm start                 # http://localhost:4200
+```
+
+La URL de la API se lee de un `.env` mediante `@ngx-env/builder`. Las variables
+deben llevar el prefijo `NG_APP_` para exponerse al cliente.
+
+| Variable | Descripción |
+|----------|-------------|
+| `NG_APP_API_URL` | URL base de la API (por defecto `http://localhost:3000/api`) |
+
+En producción (Vercel) define `NG_APP_API_URL` con la URL de Render.
+
+### Portal React (estudiante)
+
+```bash
+cd apps/portal-react
+pnpm install
+cp .env.example .env      # y ajusta VITE_API_URL si hace falta
+pnpm dev                   # http://localhost:5173
+```
+
+| Variable | Descripción |
+|----------|-------------|
+| `VITE_API_URL` | URL base de la API (por defecto `http://localhost:3000/api`) |
+
+El catálogo de cursos y las inscripciones del estudiante se cargan desde la API.
+Para ver las inscripciones propias debe existir un token de estudiante en
+`localStorage` (clave `token`).
+
+### Landing Next.js
+
+```bash
+cd apps/landing-next
+pnpm install
+cp .env.local.example .env.local   # y ajusta API_URL si hace falta
+pnpm dev                            # http://localhost:3000
 ```
 
 ---
@@ -129,6 +165,7 @@ Base: `/api`
 | PUT | `/courses/:id` | Admin | Actualizar curso |
 | DELETE | `/courses/:id` | Admin | Eliminar curso |
 | POST | `/enrollments` | Estudiante | Inscribirse a un curso |
+| POST | `/enrollments/admin` | Admin | Inscribir a un estudiante en un curso (`studentId`, `courseId`) |
 | GET | `/enrollments/me` | Estudiante | Ver mis inscripciones |
 | GET | `/enrollments/student/:studentId` | Admin / Docente | Ver inscripciones de un estudiante |
 

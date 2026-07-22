@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../lib/api";
 
 const mainLinks = [
   { to: "/dashboard-estudiante", icon: "🏠", label: "Inicio" },
@@ -6,12 +7,14 @@ const mainLinks = [
   { to: "/cursos", icon: "🔍", label: "Explorar" },
 ];
 
-const accountLinks = [
-  { to: "/perfil", icon: "👤", label: "Mi perfil" },
-  { to: "/login", icon: "🚪", label: "Cerrar sesión" },
-];
-
 export default function Sidebar({ userName, userInitials, userRole }) {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
+
   return (
     <aside className="sidebar" aria-label="Menú lateral del estudiante">
       <div className="sidebar-header">
@@ -38,15 +41,12 @@ export default function Sidebar({ userName, userInitials, userRole }) {
         ))}
 
         <div className="sidebar-section-label">Cuenta</div>
-        {accountLinks.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            className={({ isActive }) => (isActive ? "active" : undefined)}
-          >
-            <span className="nav-icon" aria-hidden="true">{link.icon}</span> {link.label}
-          </NavLink>
-        ))}
+        <NavLink to="/perfil" className={({ isActive }) => (isActive ? "active" : undefined)}>
+          <span className="nav-icon" aria-hidden="true">👤</span> Mi perfil
+        </NavLink>
+        <button type="button" className="sidebar-logout" onClick={handleLogout}>
+          <span className="nav-icon" aria-hidden="true">🚪</span> Cerrar sesión
+        </button>
       </nav>
     </aside>
   );
